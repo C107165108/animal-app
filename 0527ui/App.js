@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { ButtonGroup } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 
 function App() {
 
@@ -14,6 +15,14 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
        
+        <TextField
+          required
+          id="outlined-required"
+          label="Required"
+          defaultValue="Hello World"
+          variant="outlined"
+        />
+
         <FormControlLabel
         control={
           <Checkbox
