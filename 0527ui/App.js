@@ -8,8 +8,8 @@ import { ButtonGroup } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles,ThemeProvider,createMuiTheme } from '@material-ui/core/styles';
+import { red,orange } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   root: {
@@ -19,6 +19,17 @@ const useStyles = makeStyles({
     padding:'5px 30px',
     marginBottom:30,
   },
+})
+
+const theme= createMuiTheme({
+  palette:{
+    primary:{
+      main:red[300],
+    },
+    secondary:{
+      main:orange[300],
+    } 
+  }
 })
 
 function Buttomstyles(){
@@ -55,6 +66,7 @@ function CheckBox() {
 function App() {
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <header className="App-header">
 
@@ -100,6 +112,7 @@ function App() {
 
       </header>
     </div>
+    </ThemeProvider>
   );
 }
 
