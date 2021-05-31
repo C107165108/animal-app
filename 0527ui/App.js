@@ -14,6 +14,31 @@ import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
 import { SignalWifi1BarLock } from '@material-ui/icons';
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+function ButtonAppBar() {
+  const classes = useStyles();
+
+  return (
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
+
 const useStyles = makeStyles({
   root: {
     background:'linear-gradient(45deg,#FE6B8B,#FF8E53)',
@@ -55,6 +80,7 @@ function CheckBox() {
   const [checked,setChecked]= React.useState(true)
   
   return(
+    
     <FormControlLabel
      control={
        <Checkbox
@@ -76,8 +102,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ButtonAppBar/>
     <div className="App">
       <header className="App-header">
+      
         
         <Typography variant="h2" className="H2">
         Material-UI
