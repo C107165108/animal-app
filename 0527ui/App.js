@@ -10,6 +10,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles,ThemeProvider,createMuiTheme } from '@material-ui/core/styles';
 import { red,orange } from '@material-ui/core/colors';
+import 'fontsource-roboto';
+import Typography from '@material-ui/core/Typography';
+import { SignalWifi1BarLock } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   root: {
@@ -22,9 +25,15 @@ const useStyles = makeStyles({
 })
 
 const theme= createMuiTheme({
+  typography:{
+    h2:{
+      fontSize:18,
+      marginBottom:15
+    }
+  },
   palette:{
     primary:{
-      main:red[300],
+      main:red[200],
     },
     secondary:{
       main:orange[300],
@@ -55,7 +64,7 @@ function CheckBox() {
             // checked={state.checkedB}
             // onChange={handleChange}
           name="checkedB"
-          color="primary"
+          color="secondary"
        />}
       label="CHEAKBOX"
     /> 
@@ -69,6 +78,10 @@ function App() {
     <ThemeProvider theme={theme}>
     <div className="App">
       <header className="App-header">
+        
+        <Typography variant="h2" className="H2">
+        Material-UI
+        </Typography>
 
         <Buttomstyles/>
         
@@ -101,7 +114,7 @@ function App() {
             color="primary"
             size="small"
             // className={classes.button}
-           endIcon={<DeleteIcon />}
+            endIcon={<DeleteIcon />}
            >
             Delete
            </Button>
