@@ -14,14 +14,14 @@ export default class Home extends Component {
     handleRedirectHelpList = () => {
         Actions.push('HelpList');
     }
-    handleRedirectHelpList = () => {
-        Actions.push('HelpList');
+    handleRedirectHelpStreet = () => {
+        Actions.push('HelpStreet');
     }
 
-
+    
     render() {
-        
-        const { handleRedirectHelpMap, handleRedirectReportForm, handleRedirectHelpList } = this;
+
+        const { handleRedirectHelpMap, handleRedirectReportForm, handleRedirectHelpList ,handleRedirectHelpStreet} = this;
 
 
         return (
@@ -30,7 +30,7 @@ export default class Home extends Component {
                 <TouchableOpacity onPress={handleRedirectHelpMap}><Text>map</Text></TouchableOpacity>
                 <TouchableOpacity onPress={handleRedirectReportForm}><Text>ReportForm</Text></TouchableOpacity>
                 <TouchableOpacity onPress={handleRedirectHelpList}><Text>HelpList</Text></TouchableOpacity>
-                <TouchableOpacity onPress={handleRedirectHelpList}><Text>HelpList</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handleRedirectHelpStreet}><Text>HelpStreet</Text></TouchableOpacity>
             </View>
         );
     }
