@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import StreetView from 'react-native-streetview';
-// import Geolocation from '@react-native-community/geolocation';
+import Geolocation from '@react-native-community/geolocation';
 
 // const location = {
 //   latitude: 37.809473,
