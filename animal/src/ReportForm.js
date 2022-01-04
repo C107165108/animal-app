@@ -15,7 +15,6 @@ export default class ReportForm extends React.Component {
             phone: null,
             species: '貓',
             city: '高雄市',
-            time: null,
             url: null,
 
         };
@@ -103,7 +102,6 @@ export default class ReportForm extends React.Component {
             phone: null,
             species: '貓',
             city: '高雄市',
-            time: null,
             url: null,
         });
     };
@@ -171,11 +169,8 @@ export default class ReportForm extends React.Component {
                         </Picker>
                     </View>
 
-                    <View>
-                        <TextInput value={time} defaultValue='輸入聯絡電話' onChangeText={handleChangeTime} style={styles.input}></TextInput>
-                    </View>
 
-                    <TouchableOpacity onPress={handleAddPress} style={styles.submit}>
+                    <TouchableOpacity onPress={handleAddPress} style={styles.submit} > 
                         <Text style={styles.submitText}>新增</Text>
                     </TouchableOpacity>
 

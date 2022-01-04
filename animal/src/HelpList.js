@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView ,StyleSheet} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import data from './data';
 import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
@@ -17,13 +17,19 @@ export default class HelpList extends Component {
 
 
     handleAddReport = (animal) => {
+        
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth()+1;
+        let date = new Date().getDate();
+        let hours = new Date().getHours();
+        let minutes = new Date().getMinutes();
 
         this.setState({
             animals: [
                 ...this.state.animals,
                 {
                     id: this.state.animals.length + 1,
-                    time: new Date().getHours() + ':' + new Date().getMinutes(),
+                    time: year + '/' + month + '/' + date + ' ' + hours + ':' + minutes,
                     ...animal
                 }
             ]
@@ -66,14 +72,14 @@ export default class HelpList extends Component {
 }
 
 const styles = StyleSheet.create({
-    listcontent:{
+    listcontent: {
         marginHorizontal: 16
     },
 
     device: {
-      flexWrap: 'wrap',
-      alignItems: 'flex-start',
-      flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
     },
-  
-  });
+
+});
