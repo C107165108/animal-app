@@ -12,7 +12,7 @@ export default function HelpItem(props) {
         <View style={styles.deviceItem}>
 
 
-            <Image source={animal.image} style={styles.Img} />
+            <Image source={{ uri: animal.url }} style={styles.Img} />
             <Text style={styles.title}>{animal.title}</Text>
 
 
