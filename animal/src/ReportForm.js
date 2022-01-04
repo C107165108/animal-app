@@ -1,7 +1,7 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Actions } from 'react-native-router-flux';
-import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Button, Text ,TouchableOpacity,Dimensions} from 'react-native';
+import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
@@ -114,77 +114,73 @@ export default class ReportForm extends React.Component {
         const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleChangeTime, handleAddPress } = this;
 
         return (
-            <View >
+            <View style={styles.formContent} >
+                <ScrollView>
 
-                
-          <View style={styles.imageItem}>
-            <View style={styles.imageHeader}>
-              <Image
-                source={{ uri: !url ? 'https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png' : url }}
-                style={styles.image}
-              />
-            </View>
-            <View>
+                    <View >
+                        <View style={styles.imageHeader}>
+                            <Image
+                                source={{ uri: !url ? 'https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png' : url }}
+                                style={styles.image}
+                            />
 
-            <TouchableOpacity onPress={this.handleOpenCamera} >
-                    <Text >從相機拍照</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.handleOpenImageLibrary} >
-                    <Text >從相簿選擇</Text>
-                </TouchableOpacity>
+                            <View style={styles.imageBtn}>
 
-            </View>
-          </View>
+                                <TouchableOpacity onPress={this.handleOpenCamera} style={styles.cameraBtn}>
+                                    <Text style={styles.cameraBtnText}>上傳相片</Text>
+                                </TouchableOpacity>
+                                {/* <TouchableOpacity onPress={this.handleOpenImageLibrary} style={styles.cameraBtn}>
+                                <Text >從相簿選擇</Text>
+                            </TouchableOpacity> */}
 
+                            </View>
+                        </View>
 
-                <View>
-                    <Text>輸入標題</Text>
-                    <TextInput value={title} onChangeText={handleChangeTitle}></TextInput>
-                </View>
-
-                <View>
-                    <Text>輸入描述</Text>
-                    <TextInput value={description} onChangeText={handleChangeDescription}></TextInput>
-                </View>
-
-                <View>
-                    <Text>輸入聯絡電話</Text>
-                    <TextInput value={phone} onChangeText={handleChangePhone}></TextInput>
-                </View>
-
-                <View>
-                    <Text>請選擇物種</Text>
-                    <Picker mode='dropdown' selectedValue={species} onValueChange={handleChangeSpecies}>
-                        <Picker.Item label="cat" value="貓" />
-                        <Picker.Item label="dog" value="狗" />
-                        <Picker.Item label="rabbit" value="兔" />
-                        <Picker.Item label="bird" value="鳥" />
-                        <Picker.Item label="other" value="其他" />
-                    </Picker>
-                </View>
-
-                <View>
-                    <Text>請選擇城市</Text>
-                    <Picker mode='dropdown' selectedValue={city} onValueChange={handleChangeCity}>
-                        <Picker.Item label="taipei" value="台北" />
-                        <Picker.Item label="taoyuan" value="桃園" />
-                        <Picker.Item label="taichung" value="台中" />
-                        <Picker.Item label="tainan" value="台南" />
-                        <Picker.Item label="kaohsiung" value="高雄" />
-                    </Picker>
-                </View>
-
-                <View>
-                    <Text>輸入聯絡電話</Text>
-                    <TextInput value={time} onChangeText={handleChangeTime}></TextInput>
-                </View>
-
-                <TouchableOpacity onPress={handleAddPress} >
-                    <Text >新增</Text>
-                </TouchableOpacity>
+                    </View>
 
 
+                    <View style={styles.inputitem}>
+                        <TextInput value={title} defaultValue='請輸入標題' onChangeText={handleChangeTitle} style={styles.input}></TextInput>
+                    </View>
 
+                    <View>
+                        <TextInput value={description} defaultValue='請輸入描述' onChangeText={handleChangeDescription} style={styles.input}></TextInput>
+                    </View>
+
+                    <View>
+                        <TextInput value={phone} defaultValue='輸入聯絡電話' onChangeText={handleChangePhone} style={styles.input}></TextInput>
+                    </View>
+
+                    <View>
+                        <Picker mode='dropdown' selectedValue={species} defaultValue='請選擇物種' onValueChange={handleChangeSpecies} style={styles.input}>
+                            <Picker.Item label="cat" value="貓" />
+                            <Picker.Item label="dog" value="狗" />
+                            <Picker.Item label="rabbit" value="兔" />
+                            <Picker.Item label="bird" value="鳥" />
+                            <Picker.Item label="other" value="其他" />
+                        </Picker>
+                    </View>
+
+                    <View>
+                        <Picker mode='dropdown' selectedValue={city} defaultValue='請選擇城市' onValueChange={handleChangeCity} style={styles.input}>
+                            <Picker.Item label="taipei" value="台北" />
+                            <Picker.Item label="taoyuan" value="桃園" />
+                            <Picker.Item label="taichung" value="台中" />
+                            <Picker.Item label="tainan" value="台南" />
+                            <Picker.Item label="kaohsiung" value="高雄" />
+                        </Picker>
+                    </View>
+
+                    <View>
+                        <TextInput value={time} defaultValue='輸入聯絡電話' onChangeText={handleChangeTime} style={styles.input}></TextInput>
+                    </View>
+
+                    <TouchableOpacity onPress={handleAddPress} style={styles.submit}>
+                        <Text style={styles.submitText}>新增</Text>
+                    </TouchableOpacity>
+
+
+                </ScrollView>
 
 
 
@@ -195,36 +191,73 @@ export default class ReportForm extends React.Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'space-between',
-      backgroundColor: '#FFF',
-      borderWidth: 1,
-      borderColor: '#EEE',
+    formContent: {
+        marginHorizontal: 16,
+        marginVertical: 16,
     },
-    
-    image: {  width: Dimensions.get('window').width,
 
-     height: 250,},
-    item: {
-      height: 40,
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginVertical: 5,
-      paddingHorizontal: 10,
+    container: {
+        flex: 1,
+        justifyContent: 'space-between',
+        backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: '#EEE',
     },
-    label: {
-      fontWeight: 'bold',
+
+    image: {
+        width: Dimensions.get('window').width - 32,
+        height: Dimensions.get('window').height / 3.5,
+        borderRadius: 20,
+        position: 'relative',
     },
-    textInput: {
-      flex: 1,
-      borderBottomWidth: 1,
-      borderBottomColor: '#C0C0C0',
-      marginLeft: 15,
+    imageBtn: {
+        flexDirection: 'row',
+        marginHorizontal: 16,
+        position: 'absolute',
+        left: 255,
+        top: 175,
     },
-    switch: {
-      marginLeft: 10,
+    cameraBtn: {
+
+        backgroundColor: '#ffffff',
+        borderRadius: 30,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        alignItems: 'center',
     },
-  });
-  
+    cameraBtnText: {
+        color: 'gray',
+    },
+    inputitem: {
+
+
+    },
+    input: {
+        width: Dimensions.get('window').width - 34,
+        backgroundColor: '#ffffff',
+        height: 60,
+        borderWidth: 0.25,
+        borderRadius: 50,
+        borderColor: 'gray',
+        marginVertical: 8,
+        padding: 16,
+
+    },
+    submit: {
+        width: Dimensions.get('window').width - 34,
+        backgroundColor: '#ffffff',
+        height: 60,
+        elevation: 2,
+        borderRadius: 50,
+        marginVertical: 8,
+        padding: 16,
+    },
+    submitText: {
+        color: 'gray',
+        alignItems: 'center',
+    },
+
+
+});
+
 
