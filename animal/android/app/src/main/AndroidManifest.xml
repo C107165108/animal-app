@@ -14,7 +14,8 @@
   <uses-permission android:name="android.permission.BLUETOOTH" />
 
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCOvFGknBr73yCqssZl2T6gQA9s7_7TCQ4" />
+    <meta-data android:name="com.google.android.geo.API_KEY" 
+    android:value="AIzaSyCOvFGknBr73yCqssZl2T6gQA9s7_7TCQ4" />
     <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

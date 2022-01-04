@@ -3,13 +3,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import StreetView from 'react-native-streetview';
-import Geolocation from '@react-native-community/geolocation';
+// import Geolocation from '@react-native-community/geolocation';
 
-const location = {
-  latitude: 37.809473,
-  longitude: -122.47614,
-  radius: 50,
-};
+// const location = {
+//   latitude: 37.809473,
+//   longitude: -122.47614,
+//   radius: 50,
+// };
 
 
 const initialState = {
@@ -21,7 +21,7 @@ const initialState = {
   longitudeDelta: 0.05,
 };
 
-export default class Location extends Component {
+export default class HelpStreet extends Component {
   constructor() {
     super();
     this.state = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Stack, Scene, } from 'react-native-router-flux';
+import { Router, Stack, Scene } from 'react-native-router-flux';
 import HelpMap from './HelpMap';
 import HelpStreet from './HelpStreet';
 import Home from './Home';
