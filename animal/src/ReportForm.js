@@ -119,15 +119,20 @@ export default class ReportForm extends React.Component {
                 
           <View style={styles.imageItem}>
             <View style={styles.imageHeader}>
-              <Text style={styles.label}>餐點圖片</Text>
               <Image
-                source={{ uri: !url ? 'https://i.imgur.com/5l6dHWc.png' : url }}
+                source={{ uri: !url ? 'https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png' : url }}
                 style={styles.image}
               />
             </View>
             <View>
-              <Button title="從相機拍照" onPress={this.handleOpenCamera} />
-              <Button title="從相簿選擇" onPress={this.handleOpenImageLibrary} />
+
+            <TouchableOpacity onPress={this.handleOpenCamera} >
+                    <Text >從相機拍照</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.handleOpenImageLibrary} >
+                    <Text >從相簿選擇</Text>
+                </TouchableOpacity>
+
             </View>
           </View>
 
@@ -197,17 +202,10 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: '#EEE',
     },
-    imageItem: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginVertical: 5,
-    
-    },
     
     image: {  width: Dimensions.get('window').width,
 
-     height: 100, marginLeft: 15 },
+     height: 250,},
     item: {
       height: 40,
       flexDirection: 'row',
