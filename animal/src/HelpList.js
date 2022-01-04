@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity ,ScrollView} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView ,StyleSheet} from 'react-native';
 import data from './data';
 import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
@@ -24,15 +24,12 @@ export default class HelpList extends Component {
                 {
                     id: this.state.animals.length + 1,
                     time: new Date().getHours() + ':' + new Date().getMinutes(),
-
                     ...animal
                 }
-
             ]
         });
-
-
     }
+
     componentDidMount() {
         this.props.navigation.setParams({
             rightTitle: '新增',
@@ -51,11 +48,11 @@ export default class HelpList extends Component {
         const { handleRedirectHelpDetail } = this;
 
         return (
-            <View>
+            <View style={styles.listcontent}>
                 <ScrollView>
                     <Text>HelpList</Text>
                     <TouchableOpacity onPress={handleRedirectHelpDetail}><Text>HelpDetail</Text></TouchableOpacity>
-                    <View>
+                    <View style={styles.device}>
                         {
                             animals.map((animal) =>
                                 <HelpItem key={animal.id} animal={animal} />
@@ -67,3 +64,16 @@ export default class HelpList extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    listcontent:{
+        marginHorizontal: 16
+    },
+
+    device: {
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      flexDirection: 'row',
+    },
+  
+  });
