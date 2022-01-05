@@ -87,29 +87,74 @@ export default class HelpList extends Component {
 
 
     handleRedirectHelpDetail = (id) => {
-    const { animals } = this.state;
-    const animal = animals.find((animal) => animal.id === id);
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
 
-    Actions.push('HelpDetail', { animal: animal });
-  };
+        Actions.push('HelpDetail', { animal: animal });
+    };
+
+    handleRedirectHelpEditDetail = (id) => {
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
+
+        Actions.push('HelpEditDetail', { animal: animal });
+    };
+
+
+    // when press edit button
+    // (i) is received from Users.js
+    pressEditBtn = (i) => {
+        let users = this.state.users;
+        users[i].isEditing = true;
+        this.setState({
+            users
+        });
+    }
+
+    // (i, name, age) is received from Users.js
+    updateUser = (i, name, age) => {
+        let users = this.state.users;
+        users[i].name = name;
+        users[i].age = age;
+        users[i].isEditing = false;
+
+        this.setState({
+            users
+        });
+
+    }
+    // (i) is received from Users.js
+    pressDelete = (i) => {
+        let users = this.state.users.filter((u, index) => {
+            return index !== i;
+        });
+        this.setState({
+            users
+        });
+    }
 
 
     render() {
         const { animals } = this.state;
-        const { handleRedirectHelpDetail } = this;
+        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail } = this;
 
         return (
             <View style={styles.listcontent}>
                 <ScrollView>
-                    <Text>HelpList</Text>
-
                     <View style={styles.device}>
                         {
                             animals.map((animal) =>
-                                <HelpItem key={animal.id} animal={animal} onPress={handleRedirectHelpDetail} />
+                                <HelpItem
+                                    key={animal.id}
+                                    animal={animal}
+                                    onPress={handleRedirectHelpDetail}
+                                    onLongPress={handleRedirectHelpEditDetail} />
                             )
                         }
                     </View>
+                    <TouchableOpacity style={styles.addBtn}>
+                        <Text style={styles.addBtnIcon}>+</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         );
@@ -118,13 +163,37 @@ export default class HelpList extends Component {
 
 const styles = StyleSheet.create({
     listcontent: {
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        marginVertical: 16,
+        position: 'relative',
+
     },
 
     device: {
         flexWrap: 'wrap',
         alignItems: 'flex-start',
         flexDirection: 'row',
+    },
+    addBtn:{
+        backgroundColor:'#E15233',
+        elevation: 4,
+        width:100,
+        height:80,
+        borderRadius:50,
+
+        position: 'absolute',
+        right: 30,
+        top: 600,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignContent:'center',
+        
+    },
+    addBtnIcon:{
+        fontSize:30,
+        fontWeight:'600',
+        color:'#fff',
+        elevation: 5,
     },
 
 });

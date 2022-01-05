@@ -6,11 +6,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 export default function HelpItem(props) {
 
 
-    const { animal, onPress } = props;
+    const { animal, onPress,onLongPress } = props;
 
     return (
         <TouchableOpacity
             onPress={() => onPress(animal.id)}
+            onLongPress={() => onLongPress(animal.id)}
             style={styles.deviceItem}>
 
 
@@ -18,7 +19,7 @@ export default function HelpItem(props) {
             <Text style={styles.title}>{animal.title}</Text>
             <Text style={styles.cityText}>{animal.city}</Text>
             <Text style={styles.timeText}>{animal.time}</Text>
-
+           
         </TouchableOpacity>
     );
 

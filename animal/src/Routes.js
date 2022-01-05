@@ -6,6 +6,7 @@ import Home from './Home';
 import HelpList from './HelpList';
 import ReportForm from './ReportForm';
 import HelpDetail from './HelpDetail';
+import HelpEditDetail from './HelpEditDetail';
 
 
 
@@ -20,6 +21,7 @@ const Routes = () => {
                 <Scene key="HelpList" component={HelpList} title="HelpList" back />
                 <Scene key="ReportForm" component={ReportForm} title="ReportForm" back />
                 <Scene key="HelpDetail" component={HelpDetail} title="HelpDetail" back />
+                <Scene key="HelpEditDetail" component={HelpEditDetail} title="HelpEditDetail" back />
             </Stack>
 
         </Router>

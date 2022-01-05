@@ -5,7 +5,7 @@ import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, Touchable
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
-export default class ReportForm extends React.Component {
+export default class HelpEditDetail extends React.Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +20,7 @@ export default class ReportForm extends React.Component {
     }
 
 
-    
+
 
     componentDidMount() {
         // 初始化載入時跳出允許存取 相機 權限視窗（若已有確認存取權限，則不在跳出）
