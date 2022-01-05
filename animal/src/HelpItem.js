@@ -1,26 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 
 
 export default function HelpItem(props) {
 
 
-    const { animal } = props;
+    const { animal, onPress } = props;
 
     return (
-        <View style={styles.deviceItem}>
+        <TouchableOpacity
+            onPress={() => onPress(animal.id)}
+            style={styles.deviceItem}>
 
 
             <Image source={{ uri: animal.url }} style={styles.Img} />
             <Text style={styles.title}>{animal.title}</Text>
-
-
             <Text style={styles.cityText}>{animal.city}</Text>
             <Text style={styles.timeText}>{animal.time}</Text>
 
-
-        </View>
+        </TouchableOpacity>
     );
 
 }

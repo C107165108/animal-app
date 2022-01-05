@@ -16,7 +16,6 @@ export default class ReportForm extends React.Component {
             species: '貓',
             city: '高雄市',
             url: null,
-
         };
     }
 

@@ -17,6 +17,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 2,
@@ -29,6 +30,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 3,
@@ -41,6 +43,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 4,
@@ -53,6 +56,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 5,
@@ -65,6 +69,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 6,
@@ -77,6 +82,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 7,
@@ -89,6 +95,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
     {
         id: 8,
@@ -101,6 +108,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
+        isEditing:false,
     },
 
 ];

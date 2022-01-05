@@ -17,9 +17,9 @@ export default class HelpList extends Component {
 
 
     handleAddReport = (animal) => {
-        
+
         let year = new Date().getFullYear();
-        let month = new Date().getMonth()+1;
+        let month = new Date().getMonth() + 1;
         let date = new Date().getDate();
         let hours = new Date().getHours();
         let minutes = new Date().getMinutes();
@@ -36,6 +36,44 @@ export default class HelpList extends Component {
         });
     }
 
+
+
+
+    // pressEditBtn = (i) => {
+    //     let animals = this.state.animals;
+    //     animals[i].isEditing = true;
+    //     this.setState({
+    //         animals
+    //     });
+    // }
+
+    // // (i, name, age) is received from animals.js
+    // updateUser = (i, title, url, city, time) => {
+    //     let animals = this.state.animals;
+    //     animals[i].title = title;
+    //     animals[i].url = url;
+    //     animals[i].city = city;
+    //     animals[i].time = time;
+    //     animals[i].isEditing = false;
+
+    //     this.setState({
+    //         animals
+    //     });
+
+    // }
+    // // (i) is received from animals.js
+    // pressDelete = (i) => {
+    //     let animals = this.state.animals.filter((u, index) => {
+    //         return index !== i;
+    //     });
+    //     this.setState({
+    //         animals
+    //     });
+    // }
+
+
+
+
     componentDidMount() {
         this.props.navigation.setParams({
             rightTitle: '新增',
@@ -48,6 +86,13 @@ export default class HelpList extends Component {
     }
 
 
+    handleRedirectHelpDetail = (id) => {
+    const { animals } = this.state;
+    const animal = animals.find((animal) => animal.id === id);
+
+    Actions.push('HelpDetail', { animal: animal });
+  };
+
 
     render() {
         const { animals } = this.state;
@@ -57,11 +102,11 @@ export default class HelpList extends Component {
             <View style={styles.listcontent}>
                 <ScrollView>
                     <Text>HelpList</Text>
-                    <TouchableOpacity onPress={handleRedirectHelpDetail}><Text>HelpDetail</Text></TouchableOpacity>
+
                     <View style={styles.device}>
                         {
                             animals.map((animal) =>
-                                <HelpItem key={animal.id} animal={animal} />
+                                <HelpItem key={animal.id} animal={animal} onPress={handleRedirectHelpDetail} />
                             )
                         }
                     </View>
