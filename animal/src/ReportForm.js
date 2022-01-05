@@ -137,40 +137,42 @@ export default class ReportForm extends React.Component {
 
 
                     <View style={styles.inputitem}>
-                        <TextInput value={title} defaultValue='請輸入標題' onChangeText={handleChangeTitle} style={styles.input}></TextInput>
+                        <TextInput value={title} placeholder='請輸入標題' onChangeText={handleChangeTitle} style={styles.input}></TextInput>
                     </View>
 
                     <View>
-                        <TextInput value={description} defaultValue='請輸入描述' onChangeText={handleChangeDescription} style={styles.input}></TextInput>
+                        <TextInput value={description} placeholder='請輸入描述' onChangeText={handleChangeDescription} style={styles.input}></TextInput>
                     </View>
 
                     <View>
-                        <TextInput value={phone} defaultValue='輸入聯絡電話' onChangeText={handleChangePhone} style={styles.input}></TextInput>
+                        <TextInput value={phone} placeholder='輸入聯絡電話' onChangeText={handleChangePhone} style={styles.input}></TextInput>
                     </View>
 
-                    <View>
-                        <Picker mode='dropdown' selectedValue={species} defaultValue='請選擇物種' onValueChange={handleChangeSpecies} style={styles.input}>
-                            <Picker.Item label="cat" value="貓" />
-                            <Picker.Item label="dog" value="狗" />
-                            <Picker.Item label="rabbit" value="兔" />
-                            <Picker.Item label="bird" value="鳥" />
-                            <Picker.Item label="other" value="其他" />
+                    <View style={styles.picker}>
+                        <Picker mode='dropdown' selectedValue={species} placeholder='請選擇物種' onValueChange={handleChangeSpecies} >
+                            <Picker.Item label="請選擇物種" value="請選擇物種" />
+                            <Picker.Item label="貓" value="貓" />
+                            <Picker.Item label="狗" value="狗" />
+                            <Picker.Item label="兔" value="兔" />
+                            <Picker.Item label="鳥" value="鳥" />
+                            <Picker.Item label="其他" value="其他" />
                         </Picker>
                     </View>
 
-                    <View>
-                        <Picker mode='dropdown' selectedValue={city} defaultValue='請選擇城市' onValueChange={handleChangeCity} style={styles.input}>
-                            <Picker.Item label="taipei" value="台北" />
-                            <Picker.Item label="taoyuan" value="桃園" />
-                            <Picker.Item label="taichung" value="台中" />
-                            <Picker.Item label="tainan" value="台南" />
-                            <Picker.Item label="kaohsiung" value="高雄" />
+                    <View style={styles.picker}>
+                        <Picker mode='dropdown' selectedValue={city} placeholder='請選擇城市' onValueChange={handleChangeCity} >
+                            <Picker.Item label="請選擇城市" value="請選擇城市" />
+                            <Picker.Item label="台北市" value="台北市" />
+                            <Picker.Item label="桃園市" value="桃園市" />
+                            <Picker.Item label="台中市" value="台中市" />
+                            <Picker.Item label="台南市" value="台南市" />
+                            <Picker.Item label="高雄市" value="高雄市" />
                         </Picker>
                     </View>
 
 
-                    <TouchableOpacity onPress={handleAddPress} style={styles.submit} > 
-                        <Text style={styles.submitText}>新增</Text>
+                    <TouchableOpacity onPress={handleAddPress} style={styles.submit} >
+                        <Text style={styles.submitText}>送出</Text>
                     </TouchableOpacity>
 
 
@@ -237,18 +239,29 @@ const styles = StyleSheet.create({
         padding: 16,
 
     },
+    picker: {
+        paddingVertical: 8,
+        borderColor: 'gray',
+        borderWidth: 0.25,
+        borderRadius: 40,
+        paddingHorizontal: 4,
+        paddingVertical: 2,
+        marginVertical: 8,
+    },
     submit: {
         width: Dimensions.get('window').width - 34,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#E15233',
         height: 60,
-        elevation: 2,
+        elevation: 3,
         borderRadius: 50,
-        marginVertical: 8,
+        marginTop: 40,
         padding: 16,
+        alignItems: 'center',
     },
     submitText: {
-        color: 'gray',
+        color: '#ffffff',
         alignItems: 'center',
+        fontSize: 20,
     },
 
 
