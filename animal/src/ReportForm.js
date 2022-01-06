@@ -23,7 +23,6 @@ export default class ReportForm extends React.Component {
     
 
     componentDidMount() {
-        // 初始化載入時跳出允許存取 相機 權限視窗（若已有確認存取權限，則不在跳出）
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
             .then(granted => {
                 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -129,9 +128,6 @@ export default class ReportForm extends React.Component {
                                 <TouchableOpacity onPress={this.handleOpenCamera} style={styles.cameraBtn}>
                                     <Text style={styles.cameraBtnText}>上傳相片</Text>
                                 </TouchableOpacity>
-                                {/* <TouchableOpacity onPress={this.handleOpenImageLibrary} style={styles.cameraBtn}>
-                                <Text >從相簿選擇</Text>
-                            </TouchableOpacity> */}
 
                             </View>
                         </View>

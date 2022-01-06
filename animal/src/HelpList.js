@@ -36,25 +36,23 @@ export default class HelpList extends Component {
         });
     }
 
-    handleUpdateReport = (animal) => {
+    // handleDelete = (id) => {
+    //     let { animal } = this.state;
+    //     animal.id !== id;
+    //     this.setState({
+    //         animal
+    //     });
+    // }
 
+    handleUpdateReport = (animal) => {
         this.setState({
             animals: [
-                ...this.state.animals,
-                {
-                    ...animal
-                }
+                ...this.state.animals, { ...animal }
             ]
         });
     }
 
-    pressEditBtn = () => {
-        let animals = this.state.animals;
-        animals.isEditing = true;
-        this.setState({
-            animals
-        });
-    }
+
 
     componentDidMount() {
         this.props.navigation.setParams({
@@ -80,7 +78,7 @@ export default class HelpList extends Component {
         const { animals } = this.state;
         const animal = animals.find((animal) => animal.id === id);
 
-        Actions.HelpEditDetail({ animal: animal, handleUpdateReport: this.handleUpdateReport, pressEditBtn: this.pressEditBtn, updateAnimals: this.updateAnimals, pressDelete: this.pressDelete });
+        Actions.HelpEditDetail({ animal: animal, handleUpdateReport: this.handleUpdateReport, handleDelete: this.handleDelete});
     };
 
 
