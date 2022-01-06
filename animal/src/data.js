@@ -17,7 +17,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
-        isEditing: false,
+        isEditing: true,
     },
     {
         id: 2,
@@ -30,7 +30,7 @@ const data = [
         coordinate: '22.732496753230354, 120.34881461036613',
         city: '高雄市',
         time: '2022/1/1 22:30',
-        isEditing: false,
+        isEditing: true,
     },
     {
         id: 3,

@@ -6,183 +6,116 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
 export default class HelpEditDetail extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            title: null,
-            description: null,
-            phone: null,
-            species: '貓',
-            city: '高雄市',
-            url: null,
-        };
+    // handleUpdate = () => {
+    //     this.props.updateAnimals(this.title.value, this.description.value, this.phone.value);
+    // }
+
+    // componentDidMount() {
+    //     // 初始化載入時跳出允許存取 相機 權限視窗（若已有確認存取權限，則不在跳出）
+    //     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
+    //         .then(granted => {
+    //             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //                 console.log('已允許使用相機權限');
+    //             } else {
+    //                 console.log('已拒絕使用相機權限');
+    //             }
+    //         })
+    //         .catch(error => console.log(error));
+    // }
+
+    // handleOpenCamera = () => {
+    //     launchCamera({}, this.handleSelectMealImage);
+    // };
+
+    // handleOpenImageLibrary = () => {
+    //     launchImageLibrary({}, this.handleSelectMealImage);
+    // };
+
+
+    
+  
+
+    handleUpdateTitle = (title) => {
+        let {animal} = this.props;
+        animal.title = title;
+        this.setState({
+           animal
+        });
+    };
+
+    handleUpdateDescription = (description) => {
+        let {animal} = this.props;
+        animal.description = description;
+
+        this.setState({
+            animal
+        });
+    };
+
+    handleUpdatePhone = (phone) => {
+        let {animal} = this.props;
+        animal.phone = phone;
+        this.setState({
+            animal
+        });
+    };
+
+    pressDelete = (id) => {
+        let animals = this.state.animals.filter((animal) => animal.id !== id);
+        this.setState({
+            animals
+        });
     }
 
 
 
 
-    componentDidMount() {
-        // 初始化載入時跳出允許存取 相機 權限視窗（若已有確認存取權限，則不在跳出）
-        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
-            .then(granted => {
-                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                    console.log('已允許使用相機權限');
-                } else {
-                    console.log('已拒絕使用相機權限');
-                }
-            })
-            .catch(error => console.log(error));
-    }
+    handleUpdatePress = () => {
+        const { handleUpdateReport } = this.props;
 
-    handleOpenCamera = () => {
-        launchCamera({}, this.handleSelectMealImage);
-    };
-
-    handleOpenImageLibrary = () => {
-        launchImageLibrary({}, this.handleSelectMealImage);
-    };
-
-    handleSelectMealImage = (response) => {
-        const { didCancel, assets } = response;
-        if (!didCancel) {
-            this.setState({ url: assets[0].uri });
-        }
-    };
-
-
-
-
-    handleChangeTitle = (text) => {
-        this.setState({
-            title: text,
-        });
-    };
-
-    handleChangeDescription = (text) => {
-        this.setState({
-            description: text,
-        });
-    };
-
-    handleChangePhone = (text) => {
-        this.setState({
-            phone: text,
-        });
-    };
-
-    handleChangeSpecies = (value) => {
-        this.setState({
-            species: value,
-        });
-    };
-
-    handleChangeCity = (value) => {
-        this.setState({
-            city: value,
-        });
-    };
-
-
-
-    handleChangeTime = (text) => {
-        this.setState({
-            time: text,
-        });
-    };
-
-
-
-    handleAddPress = () => {
-        const { handleAddReport } = this.props;
         Actions.pop();
 
-        handleAddReport(this.state);
+        handleUpdateReport(this.state);
         this.setState({
             title: null,
             description: null,
             phone: null,
-            species: '貓',
-            city: '高雄市',
-            url: null,
         });
     };
+
 
 
     render() {
-        const { title, description, phone, species, city, time, url } = this.state;
-        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleChangeTime, handleAddPress } = this;
-
+        const { animal } = this.props;
+        const { pressEditBtn, pressDelete } = this.props;
+        const { handleUpdateTitle,handleUpdateDescription,handleUpdatePhone,handleUpdatePress,updateAnimals } = this;
         return (
             <View style={styles.formContent} >
                 <ScrollView>
 
-                    <View >
-                        <View style={styles.imageHeader}>
-                            <Image
-                                source={{ uri: !url ? 'https://www.macmillandictionary.com/us/external/slideshow/full/Grey_full.png' : url }}
-                                style={styles.image}
-                            />
-
-                            <View style={styles.imageBtn}>
-
-                                <TouchableOpacity onPress={this.handleOpenCamera} style={styles.cameraBtn}>
-                                    <Text style={styles.cameraBtnText}>上傳相片</Text>
-                                </TouchableOpacity>
-                                {/* <TouchableOpacity onPress={this.handleOpenImageLibrary} style={styles.cameraBtn}>
-                                <Text >從相簿選擇</Text>
-                            </TouchableOpacity> */}
-
-                            </View>
-                        </View>
-
-                    </View>
 
 
                     <View style={styles.inputitem}>
-                        <TextInput value={title} placeholder='請輸入標題' onChangeText={handleChangeTitle} style={styles.input}></TextInput>
+                        <TextInput value={animal.title} onChangeText={handleUpdateTitle} required defaultValue={animal.title} style={styles.input}></TextInput>
                     </View>
 
                     <View>
-                        <TextInput value={description} placeholder='請輸入描述' onChangeText={handleChangeDescription} style={styles.input}></TextInput>
+                        <TextInput value={animal.description}  onChangeText={handleUpdateDescription} required defaultValue={animal.phone} style={styles.input}></TextInput>
                     </View>
 
                     <View>
-                        <TextInput value={phone} placeholder='輸入聯絡電話' onChangeText={handleChangePhone} style={styles.input}></TextInput>
+                        <TextInput value={animal.phone}  onChangeText={handleUpdatePhone} required defaultValue={animal.description} style={styles.input}></TextInput>
                     </View>
 
-                    <View style={styles.picker}>
-                        <Picker mode='dropdown' selectedValue={species} placeholder='請選擇物種' onValueChange={handleChangeSpecies} >
-                            <Picker.Item label="請選擇物種" value="請選擇物種" />
-                            <Picker.Item label="貓" value="貓" />
-                            <Picker.Item label="狗" value="狗" />
-                            <Picker.Item label="兔" value="兔" />
-                            <Picker.Item label="鳥" value="鳥" />
-                            <Picker.Item label="其他" value="其他" />
-                        </Picker>
-                    </View>
-
-                    <View style={styles.picker}>
-                        <Picker mode='dropdown' selectedValue={city} placeholder='請選擇城市' onValueChange={handleChangeCity} >
-                            <Picker.Item label="請選擇城市" value="請選擇城市" />
-                            <Picker.Item label="台北市" value="台北市" />
-                            <Picker.Item label="桃園市" value="桃園市" />
-                            <Picker.Item label="台中市" value="台中市" />
-                            <Picker.Item label="台南市" value="台南市" />
-                            <Picker.Item label="高雄市" value="高雄市" />
-                        </Picker>
-                    </View>
-
-
-                    <TouchableOpacity onPress={handleAddPress} style={styles.submit} >
-                        <Text style={styles.submitText}>送出</Text>
+                    <TouchableOpacity onPress={pressDelete} style={styles.submit} >
+                        <Text style={styles.submitText}>刪除</Text>
                     </TouchableOpacity>
 
-
+                    <TouchableOpacity onPress={handleUpdatePress} style={styles.submit} >
+                        <Text style={styles.submitText}>送出</Text>
+                    </TouchableOpacity>
                 </ScrollView>
-
-
-
             </View>
         );
     }
