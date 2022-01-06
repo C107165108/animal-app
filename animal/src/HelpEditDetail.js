@@ -5,9 +5,8 @@ import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, Touchable
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
+
 export default class HelpEditDetail extends React.Component {
-
-
 
     componentDidMount() {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
@@ -22,14 +21,14 @@ export default class HelpEditDetail extends React.Component {
     }
 
     handleOpenCamera = () => {
-        launchCamera({}, this.handleSelectMealImage);
+        launchCamera({}, this.handleSelectImage);
     };
 
     handleOpenImageLibrary = () => {
-        launchImageLibrary({}, this.handleSelectMealImage);
+        launchImageLibrary({}, this.handleSelectImage);
     };
 
-    handleSelectMealImage = (response) => {
+    handleSelectImage = (response) => {
         const { didCancel, assets } = response;
         if (!didCancel) {
             this.setState({ url: assets.uri });
@@ -112,6 +111,7 @@ export default class HelpEditDetail extends React.Component {
 
     render() {
         const { animal } = this.props;
+        const { image } = this.props;
         const { handleUpdateTitle, handleUpdateDescription, handleUpdatePhone, handleUpdatePress, handleChangeSpecies, handleChangeCity, handleDeletePress } = this;
         return (
             <View style={styles.formContent} >
@@ -147,9 +147,6 @@ export default class HelpEditDetail extends React.Component {
                         <TextInput value={animal.phone} onChangeText={handleUpdatePhone} required defaultValue={animal.description} style={styles.input}></TextInput>
                     </View>
 
-
-
-
                     <View style={styles.picker}>
                         <Picker mode='dropdown' selectedValue={animal.species} placeholder='請選擇物種' onValueChange={handleChangeSpecies} >
                             <Picker.Item label="請選擇物種" value="請選擇物種" />
@@ -172,13 +169,18 @@ export default class HelpEditDetail extends React.Component {
                         </Picker>
                     </View>
 
-                    <TouchableOpacity onPress={handleDeletePress} style={styles.submit} >
-                        <Text style={styles.submitText}>刪除</Text>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity onPress={handleUpdatePress} style={styles.submit} >
-                        <Text style={styles.submitText}>送出</Text>
-                    </TouchableOpacity>
+                    <View style={styles.btnGroup}>
+                        <TouchableOpacity onPress={handleDeletePress} style={styles.delete} >
+                            <Text style={styles.deleteText}>刪</Text>
+                       
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={handleUpdatePress} style={styles.submit} >
+                            <Text style={styles.submitText}>更新</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </ScrollView>
             </View>
         );
@@ -244,13 +246,35 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         marginVertical: 8,
     },
+    btnGroup:{
+        flexDirection: 'row',
+    },
+    delete: {
+        width: 80,
+        backgroundColor: '#ffffff',
+        height: 60,
+        elevation: 3,
+        borderRadius: 50,
+        marginTop: 40,
+        padding: 16,
+        alignItems: 'center',
+    },
+    deleteText:{
+        color:'#E15233'
+    },
+    deleteicon: {
+        width: 10,
+        color: 'white',
+    },
     submit: {
-        width: Dimensions.get('window').width - 34,
+        width: Dimensions.get('window').width - 34 - 80 -8,
         backgroundColor: '#E15233',
         height: 60,
         elevation: 3,
         borderRadius: 50,
         marginTop: 40,
+        marginLeft:8,
+        marginBottom:16,
         padding: 16,
         alignItems: 'center',
     },

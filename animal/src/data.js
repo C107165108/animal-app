@@ -4,6 +4,12 @@ import dog1 from "./images/dog1.jpeg";
 import rabit1 from "./images/rabit1.jpeg";
 import dog2 from "./images/dog2.jpeg";
 
+export const image = [
+    { dog2: dog2 },
+
+];
+
+
 
 const data = [
     {

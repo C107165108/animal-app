@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-nati
 import data from './data';
 import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
+import image from './data';
 
 
 
@@ -12,6 +13,7 @@ export default class HelpList extends Component {
         super(props);
         this.state = {
             animals: data,
+            image: image,
         };
     }
 
@@ -78,7 +80,10 @@ export default class HelpList extends Component {
         const { animals } = this.state;
         const animal = animals.find((animal) => animal.id === id);
 
-        Actions.HelpEditDetail({ animal: animal, handleUpdateReport: this.handleUpdateReport, handleDelete: this.handleDelete});
+        Actions.HelpEditDetail({
+            animal: animal, image: image,
+            handleUpdateReport: this.handleUpdateReport, handleDelete: this.handleDelete
+        });
     };
 
 
