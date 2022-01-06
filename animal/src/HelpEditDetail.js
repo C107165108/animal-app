@@ -61,13 +61,7 @@ export default class HelpEditDetail extends React.Component {
         });
     };
 
-    handleChangeSpecies = (species) => {
-        let { animal } = this.props;
-        animal.species = species;
-        this.setState({
-            animal
-        });
-    }
+   
 
     handleChangeCity = (city) => {
         let { animal } = this.props;
@@ -77,17 +71,18 @@ export default class HelpEditDetail extends React.Component {
         });
     }
 
+   
 
-    // handleDeletePress = () => {
-    //     const { handleDelete } = this.props;
-    //     animal = () => handleDelete(id);
-    //     Actions.pop();
+    handleDeletePress = () => {
+        const { handleDeleteReport } = this.props;
+        animal = () => handleDelete(id);
+        Actions.pop();
 
-    //     handleDelete(this.state);
-    //     this.setState({
-    //         animal
-    //     });
-    // };
+        handleDeleteReport(this.state);
+        this.setState({
+            animal
+        });
+    };
 
 
 

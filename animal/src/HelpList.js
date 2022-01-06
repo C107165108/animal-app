@@ -38,6 +38,8 @@ export default class HelpList extends Component {
         });
     }
 
+
+
     // handleDelete = (id) => {
     //     let { animal } = this.state;
     //     animal.id !== id;
@@ -46,7 +48,14 @@ export default class HelpList extends Component {
     //     });
     // }
 
-    handleUpdateReport = (animal) => {
+    handleDeleteReport = (id) => {
+        let { animals } = this.state;
+        animals.id !== id;
+        this.setState({ animals });
+        console.log('delete')
+    }
+
+    handleUpdateReport = () => {
         this.setState({
             animals: [
                 ...this.state.animals
@@ -82,7 +91,7 @@ export default class HelpList extends Component {
 
         Actions.HelpEditDetail({
             animal: animal, image: image,
-            handleUpdateReport: this.handleUpdateReport, handleDelete: this.handleDelete
+            handleUpdateReport: this.handleUpdateReport, handleDeleteReport: this.handleDeleteReport
         });
     };
 
