@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions,ScrollView } from 'react-native';
+import StreetView from 'react-native-streetview';
 
 
 export default function HelpDetail(props) {
@@ -13,6 +14,23 @@ export default function HelpDetail(props) {
                     source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1/1257.png' }} />
                 <Text style={styles.phoneText}>{animal.phone}</Text>
                 <Text style={styles.descriptionText}>{animal.description}</Text>
+
+                <View>
+                    <StreetView
+                        style={styles.streetView}
+                        allGesturesEnabled={true}
+                        coordinate={{
+                            latitude: animal.latitude,
+                            longitude: animal.longitude,
+                        }}
+                        pov={{
+                            tilt: parseFloat(0),
+                            bearing: parseFloat(0),
+                            zoom: parseInt(1),
+                        }}
+
+                    />
+                </View>
             </View>
         </View>
     );
@@ -22,7 +40,15 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginVertical: 16,
     },
-
+    streetView: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: Dimensions.get('window').width - 30,
+        height: Dimensions.get('window').height / 1,
+      },
     container: {
         flex: 1,
         justifyContent: 'space-between',

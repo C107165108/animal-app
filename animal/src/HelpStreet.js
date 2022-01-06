@@ -1,9 +1,10 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import StreetView from 'react-native-streetview';
 import Geolocation from '@react-native-community/geolocation';
+import { TextInput } from 'react-native-gesture-handler';
 
 // const location = {
 //   latitude: 37.809473,
@@ -13,8 +14,8 @@ import Geolocation from '@react-native-community/geolocation';
 
 
 const initialState = {
-  latitude: 0,
-  longitude: 0,
+  latitude: 22.723826907971404,
+  longitude: 120.36387777399943,
   //latitude: 22.633333, 高雄
   //longitude: 120.266670,
   latitudeDelta: 0.1, //大約半徑3公里
@@ -25,44 +26,63 @@ export default class HelpStreet extends Component {
   constructor() {
     super();
     this.state = {
-      curentPosition: initialState,
+      curentPosition: null,
     };
   }
 
-  componentDidMount() {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        const { longitude, latitude } = position.coords;
-        this.setState({
-          curentPosition: {
-            ...this.state.curentPosition,
-            latitude,
-            longitude,
-          },
-        });
-      },
-      (error) => alert(error.message),
-      { timeout: 20000, maximumAge: 1000 },
-    );
-  }
+
+
+  // onChange = (value) => {
+  //   this.setState({
+  //     curentPosition: value,
+  //   });
+  // };
+
+  // componentDidMount() {
+  //   Geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { longitude, latitude } = position.coords;
+  //       this.setState({
+  //         curentPosition: {
+  //           ...this.state.curentPosition,
+  //           latitude,
+  //           longitude,
+  //         },
+  //       });
+  //     },
+  //     (error) => alert(error.message),
+  //     { timeout: 20000, maximumAge: 1000 },
+  //   );
+  // }
 
   render() {
-    const { curentPosition } = this.state;
+    const initialState = {
+      latitude: 22.723826907971404,
+      longitude: 120.36387777399943,
+    }
+
     return (
       <View style={styles.container}>
-        <StreetView
-          style={styles.streetView}
-          allGesturesEnabled={true}
-          coordinate={{
-            latitude: curentPosition.latitude,
-            longitude: curentPosition.longitude,
-          }}
-          pov={{
-            tilt: parseFloat(0),
-            bearing: parseFloat(0),
-            zoom: parseInt(1),
-          }}
-        />
+        <View>
+          {/* <TextInput value={curentPosition} placeholder='輸入' onChange={onChange} style={styles.search}> </TextInput> */}
+        </View>
+        <View>
+          <StreetView
+            style={styles.streetView}
+            allGesturesEnabled={true}
+            coordinate={{
+              latitude: initialState.latitude,
+              longitude: initialState.longitude,
+            }}
+            pov={{
+              tilt: parseFloat(0),
+              bearing: parseFloat(0),
+              zoom: parseInt(1),
+            }}
+
+          />
+        </View>
+
       </View>
     );
   }
@@ -71,6 +91,8 @@ export default class HelpStreet extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+
   },
   streetView: {
     position: 'absolute',
@@ -78,6 +100,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 35,
+  },
+  search: {
+    backgroundColor: 'red',
   },
 });
 
