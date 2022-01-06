@@ -49,7 +49,7 @@ export default class HelpList extends Component {
     handleUpdateReport = (animal) => {
         this.setState({
             animals: [
-                ...this.state.animals, { ...animal }
+                ...this.state.animals
             ]
         });
     }
