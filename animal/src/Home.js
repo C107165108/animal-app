@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import data from './data';
 
 
 export default class Home extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            animals: data,
+        };
+    }
+
     handleRedirectHelpMap = () => {
-        Actions.push('HelpMap');
+        let { animals } = this.state;
+        Actions.HelpMap({ animals: animals });
     }
     handleRedirectReportForm = () => {
         Actions.push('ReportForm');
@@ -29,8 +38,8 @@ export default class Home extends Component {
                 <Text style={styles.title}>Home</Text>
                 <TouchableOpacity style={styles.button} onPress={handleRedirectHelpMap}><Text style={styles.text}>救援地圖</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={handleRedirectReportForm}><Text style={styles.text}>表單申請</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button}  onPress={handleRedirectHelpList}><Text style={styles.text}>救援清單</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button}  onPress={handleRedirectHelpStreet}><Text style={styles.text}>街景狀況</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handleRedirectHelpList}><Text style={styles.text}>救援清單</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handleRedirectHelpStreet}><Text style={styles.text}>街景狀況</Text></TouchableOpacity>
             </View>
         );
     }
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize:20,
+        fontSize: 20,
     },
     title: {
         flexDirection: 'column',
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontSize:20,
+        fontSize: 20,
     },
     button: {
         alignItems: 'center',
@@ -60,6 +69,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#68a0cf',
         overflow: 'hidden',
         margin: 10,
-        borderradius:10,
+        borderradius: 10,
     },
 });

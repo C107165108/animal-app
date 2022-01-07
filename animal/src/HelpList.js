@@ -4,6 +4,7 @@ import data from './data';
 import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
 import image from './data';
+import { Marker } from 'react-native-maps';
 
 
 
@@ -48,6 +49,8 @@ export default class HelpList extends Component {
     //     });
     // }
 
+
+
     handleDeleteReport = (id) => {
         let { animals } = this.state;
         animals.id !== id;
@@ -63,15 +66,41 @@ export default class HelpList extends Component {
         });
     }
 
+    mapMarkers = () => {
+        return this.state.animals.map((animal) =>
+            <Marker
+                key={animal.id}
+                coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
+                title={animal.title}
+                description={animal.description}
+                pinColor={"purple"}
+              
+            >
+            </Marker >)
+    }
+
+
+
+    // componentDidMount() {
+    //     this.props.navigation.setParams({
+    //         rightTitle: '新增',
+
+    //         onRight: () => {
+    //             Actions.ReportForm({ handleAddReport: this.handleAddReport });
+    //             console.log('123');
+    //         },
+    //     });
+    // }
 
 
     componentDidMount() {
+        let { animals } = this.state;
         this.props.navigation.setParams({
-            rightTitle: '新增',
+            rightTitle: '地圖',
 
             onRight: () => {
-                Actions.ReportForm({ handleAddReport: this.handleAddReport });
-                console.log('123');
+                Actions.HelpMap({ animals: animals, mapMarkers: this.mapMarkers });
+
             },
         });
     }
@@ -114,6 +143,7 @@ export default class HelpList extends Component {
                                     onPress={handleRedirectHelpDetail}
                                     onLongPress={handleRedirectHelpEditDetail} />
                             )
+
                         }
                     </View>
                     <TouchableOpacity style={styles.addBtn}>

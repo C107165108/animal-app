@@ -41,12 +41,7 @@ const styles = StyleSheet.create({
         marginVertical: 16,
     },
     streetView: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: Dimensions.get('window').width - 30,
+        width: Dimensions.get('window').width - 40,
         height: Dimensions.get('window').height / 1,
       },
     container: {
