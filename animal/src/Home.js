@@ -79,7 +79,13 @@ export default class Home extends Component {
         const { animals } = this.state;
         const animal = animals.find((animal) => animal.id === id);
 
-        Actions.push('HelpDetail', { animal: animal });
+        Actions.HelpDetail({ animal: animal, handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView });
+    };
+
+    handleRedirectHelpDetailStrettView = (id) => {
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
+        Actions.HelpDetailStrettView({ animal: animal });
     };
 
     // actions HelpListwrap
@@ -113,7 +119,7 @@ export default class Home extends Component {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 22.729890557063307, 
+                        latitude: 22.729890557063307,
                         longitude: 120.3555999613627,
                         latitudeDelta: 0.1, //半徑
                         longitudeDelta: 0.05
@@ -145,8 +151,8 @@ export default class Home extends Component {
 
 
                 </MapView>
-                <View  style={styles.helpListContent} >
-                    <View style={styles.helpListContent} >
+                <View style={styles.helpListContent} >
+                    <View >
                         <TouchableOpacity style={styles.seeAllbtn} onPress={handleRedirectHelpListwrap}>
                             <Text style={styles.seeAllbtnText} >查看全部</Text>
                         </TouchableOpacity>
@@ -155,7 +161,8 @@ export default class Home extends Component {
                         style={styles.helpList}
                         animals={animals}
                         handleRedirectHelpDetail={handleRedirectHelpDetail}
-                        handleRedirectHelpEditDetail={handleRedirectHelpEditDetail} />
+                        handleRedirectHelpEditDetail={handleRedirectHelpEditDetail}
+                    />
                 </View>
             </View>
         );
@@ -169,32 +176,44 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
-        position: 'absolute',
+
     },
     map: {
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height +90,
+        height: Dimensions.get("window").height,
+        position: 'absolute',
     },
     marker: {
         width: 50,
         height: 50,
     },
 
-    helpListContent:{
+    helpListContent: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        position: 'relative',
+        top: 450,
     },
     seeAllbtn: {
         marginTop: 20,
-        marginRight:16,
-        alignItems: 'flex-end',
+        marginRight: 16,
+
+        width: 100,
+        borderRadius: 50,
+        backgroundColor: '#fff',
+        position: 'relative',
+        left: 298,
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 4,
 
     },
     seeAllbtnText: {
         color: "#FA8B70",
+        paddingVertical: 12,
+        fontWeight: '600',
     },
     helpList: {
-        position: 'relative',
-        bottom: 100,
+
     },
 })

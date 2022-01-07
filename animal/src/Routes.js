@@ -8,6 +8,7 @@ import ReportForm from './ReportForm';
 import HelpDetail from './HelpDetail';
 import HelpEditDetail from './HelpEditDetail';
 import HelpListwrap from './HelpListwrap';
+import HelpDetailStrettView from './HelpDetailStrettView';
 
 
 
@@ -23,6 +24,7 @@ const Routes = () => {
                 <Scene key="HelpListwrap" component={HelpListwrap} title="HelpListwrap" back />
                 <Scene key="ReportForm" component={ReportForm} title="ReportForm" back />
                 <Scene key="HelpDetail" component={HelpDetail} title="HelpDetail" back />
+                <Scene key="HelpDetailStrettView" component={HelpDetailStrettView} title="HelpDetailStrettView" back />
                 <Scene key="HelpEditDetail" component={HelpEditDetail} title="HelpEditDetail" back />
             </Stack>
 

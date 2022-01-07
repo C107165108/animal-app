@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions,ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import StreetView from 'react-native-streetview';
 
 
 export default function HelpDetail(props) {
-    const { animal } = props;
+    const { animal ,handleRedirectHelpDetailStrettView} = props;
     return (
         <View style={styles.content} >
             <Image style={styles.image} source={{ uri: animal.url }}></Image>
@@ -30,6 +31,9 @@ export default function HelpDetail(props) {
                         }}
 
                     />
+                     <TouchableOpacity style={styles.seeAllbtn} >
+                            <Text style={styles.seeAllbtnText} onPress={handleRedirectHelpDetailStrettView} >查看街景 →</Text>
+                        </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -40,10 +44,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginVertical: 16,
     },
-    streetView: {
-        width: Dimensions.get('window').width - 40,
-        height: Dimensions.get('window').height /4,
-      },
+
     container: {
         flex: 1,
         justifyContent: 'space-between',
@@ -76,7 +77,33 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         marginTop: 8,
+        marginBottom:16,
     },
+    streetView: {
+        width: Dimensions.get('window').width - 40,
+        height: Dimensions.get('window').height / 4,
+        position: 'absolute',
+    },
+    seeAllbtn: {
+       
+
+        width: 100,
+        borderRadius: 50,
+        backgroundColor: '#fff',
+        position: 'relative',
+        left:16,
+        top:45,
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 4,
+
+    },
+    seeAllbtnText: {
+        color: "#FA8B70",
+        paddingVertical: 12,
+        fontWeight: '600',
+    },
+   
 
 });
 

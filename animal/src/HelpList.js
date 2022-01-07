@@ -28,6 +28,9 @@ export default function HelpList(props) {
 
                     }
                 </View>
+                <TouchableOpacity style={styles.addBtn}>
+                    <Text style={styles.addBtnIcon}>+</Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     );
