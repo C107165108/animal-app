@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     },
     streetView: {
         width: Dimensions.get('window').width - 40,
-        height: Dimensions.get('window').height / 1,
+        height: Dimensions.get('window').height /4,
       },
     container: {
         flex: 1,

@@ -84,13 +84,7 @@ export default class ReportForm extends React.Component {
 
 
 
-    handleChangeTime = (text) => {
-        this.setState({
-            time: text,
-        });
-    };
-
-
+  
 
     handleAddPress = () => {
         const { handleAddReport } = this.props;
@@ -109,8 +103,8 @@ export default class ReportForm extends React.Component {
 
 
     render() {
-        const { title, description, phone, species, city, time, url } = this.state;
-        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleChangeTime, handleAddPress } = this;
+        const { title, description, phone, species, city,  url } = this.state;
+        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity,  handleAddPress } = this;
 
         return (
             <View style={styles.formContent} >
