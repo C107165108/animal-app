@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import data from './data';
+import { StyleSheet, Dimensions, Animated, View, Text, TouchableOpacity } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { Actions } from 'react-native-router-flux';
+import image from './data';
+import HelpList from './HelpList';
 
 
 export default class Home extends Component {
@@ -13,62 +16,183 @@ export default class Home extends Component {
         };
     }
 
-    handleRedirectHelpMap = () => {
-        let { animals } = this.state;
-        Actions.HelpMap({ animals: animals });
-    }
-    handleRedirectReportForm = () => {
-        Actions.push('ReportForm');
-    }
-    handleRedirectHelpList = () => {
-        Actions.push('HelpList');
-    }
-    handleRedirectHelpStreet = () => {
-        Actions.push('HelpStreet');
+    // 新增
+    handleAddReport = (animal) => {
+
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth() + 1;
+        let date = new Date().getDate();
+        let hours = new Date().getHours();
+        let minutes = new Date().getMinutes();
+
+        this.setState({
+            animals: [
+                ...this.state.animals,
+                {
+                    id: this.state.animals.length + 1,
+                    time: year + '/' + month + '/' + date + ' ' + hours + ':' + minutes,
+                    isEditing: true,
+                    ...animal
+                }
+            ]
+        });
     }
 
+    // handleDelete = (id) => {
+    //     let { animal } = this.state;
+    //     animal.id !== id;
+    //     this.setState({
+    //         animal
+    //     });
+    // }
+
+    // 刪除
+    handleDeleteReport = (id) => {
+        let { animals } = this.state;
+        animals.id !== id;
+        this.setState({ animals });
+        console.log('delete')
+    }
+
+    // 新增
+    handleUpdateReport = () => {
+        this.setState({
+            animals: [
+                ...this.state.animals
+            ]
+        });
+    }
+
+    // action 新增
+    componentDidMount() {
+        this.props.navigation.setParams({
+            rightTitle: '新增',
+
+            onRight: () => {
+                Actions.ReportForm({ handleAddReport: this.handleAddReport });
+                console.log('123');
+            },
+        });
+    }
+
+    // actions detail
+    handleRedirectHelpDetail = (id) => {
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
+
+        Actions.push('HelpDetail', { animal: animal });
+    };
+
+    // actions detail
+    handleRedirectHelpDetail = (id) => {
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
+
+        Actions.push('HelpDetail', { animal: animal });
+    };
+
+     // actions detail
+    handleRedirectHelpListwrap = () => {
+        const { animals } = this.state;
+        Actions.HelpListwrap( { 
+            animals: animals,
+            handleRedirectHelpDetail:this.handleRedirectHelpDetail,
+            handleRedirectHelpEditDetail:this.handleRedirectHelpEditDetail,
+         });
+    };
+
+    // update
+    handleRedirectHelpEditDetail = (id) => {
+        const { animals } = this.state;
+        const animal = animals.find((animal) => animal.id === id);
+
+        Actions.HelpEditDetail({
+            animal: animal, image: image,
+            handleUpdateReport: this.handleUpdateReport, handleDeleteReport: this.handleDeleteReport
+        });
+    };
 
     render() {
 
-        const { handleRedirectHelpMap, handleRedirectReportForm, handleRedirectHelpList, handleRedirectHelpStreet } = this;
-
+        const { animals } = this.state;
+        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail ,  handleRedirectHelpListwrap} = this;
 
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Home</Text>
-                <TouchableOpacity style={styles.button} onPress={handleRedirectHelpMap}><Text style={styles.text}>救援地圖</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleRedirectReportForm}><Text style={styles.text}>表單申請</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleRedirectHelpList}><Text style={styles.text}>救援清單</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleRedirectHelpStreet}><Text style={styles.text}>街景狀況</Text></TouchableOpacity>
+                <MapView
+                    style={styles.map}
+                    initialRegion={{
+                        latitude: 22.732496753230354,
+                        longitude: 120.34881461036613,
+                        latitudeDelta: 0.1, //半徑
+                        longitudeDelta: 0.05
+                    }}
+                    provider="google"
+                >
+
+                    {animals.map((animal, index) => (
+                        <Marker
+                            key={index}
+                            coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
+                            title={animal.title}
+                            description={animal.description}
+                            pinColor={"purple"}
+
+                        >
+                            <Callout >
+
+                                <Animated.View style={[styles.markerWrap]}>
+                                    <Animated.Image
+                                        source={require('./images/cat1.jpeg')}
+                                        style={styles.marker}
+                                    // resizeMode="cover"
+                                    />
+                                </Animated.View>
+                            </Callout>
+                        </Marker>
+                    ))}
+                </MapView>
+                <View >
+                    <TouchableOpacity  style={styles.seeAllbtn} onPress={  handleRedirectHelpListwrap}>
+                        <Text style={styles.seeAllbtnText} >查看全部</Text>
+                    </TouchableOpacity></View>
+                <HelpList
+                    style={styles.helpList}
+                    animals={animals}
+                    handleRedirectHelpDetail={handleRedirectHelpDetail}
+                    handleRedirectHelpEditDetail={handleRedirectHelpEditDetail} />
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 20,
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        position: 'absolute',
     },
-    title: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+    map: {
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height - 100,
     },
-    text: {
-        fontSize: 20,
+    marker: {
+        width: 50,
+        height: 50,
     },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 200,
-        height: 100,
-        backgroundColor: '#68a0cf',
-        overflow: 'hidden',
-        margin: 10,
-        borderradius: 10,
+    seeAllbtn: {
+        marginTop:20,
+        alignItems:'flex-end',
+
     },
-});
+    seeAllbtnText:{
+        color:"#E15233",
+    },
+    helpList: {
+        position: 'relative',
+        bottom: 50,
+    },
+})

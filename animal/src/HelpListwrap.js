@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import HelpItem from './HelpItem';
 
-
-
-
-export default function HelpList(props) {
-
-
-
+export default function HelpListwrap(props) {
 
     const { animals } = props;
     const { handleRedirectHelpDetail, handleRedirectHelpEditDetail } = props;
 
     return (
         <View style={styles.listcontent}>
-            <ScrollView horizontal={true}>
+            <ScrollView >
                 <View style={styles.device}>
                     {
                         animals.map((animal) =>
@@ -36,7 +30,6 @@ export default function HelpList(props) {
     );
 }
 
-
 const styles = StyleSheet.create({
     listcontent: {
         marginHorizontal: 16,
@@ -46,8 +39,8 @@ const styles = StyleSheet.create({
     },
 
     device: {
-
-
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
         flexDirection: 'row',
     },
     addBtn: {

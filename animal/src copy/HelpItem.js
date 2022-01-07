@@ -28,9 +28,8 @@ export default function HelpItem(props) {
 const styles = StyleSheet.create({
     deviceItem: {
         backgroundColor: '#FFF',
-
-        width: 160,
-        height: 240,
+        justifyContent: 'center',
+        width: 172,
         borderRadius: 20,
         marginHorizontal: 8,
         marginVertical: 8,
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     Img: {
-        width: 160,
+        width: 172,
         height: 140,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
