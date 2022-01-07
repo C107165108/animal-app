@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     cityText: {
         fontSize: 12,
-        color: '#E15233',
+        color: '#FA8B70',
         marginVertical: 4,
         marginHorizontal: 16,
     },

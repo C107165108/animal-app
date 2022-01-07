@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     },
     submit: {
         width: Dimensions.get('window').width - 34,
-        backgroundColor: '#E15233',
+        backgroundColor: '#FA8B70',
         height: 60,
         elevation: 3,
         borderRadius: 50,

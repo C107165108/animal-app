@@ -28,9 +28,6 @@ export default function HelpList(props) {
 
                     }
                 </View>
-                <TouchableOpacity style={styles.addBtn}>
-                    <Text style={styles.addBtnIcon}>+</Text>
-                </TouchableOpacity>
             </ScrollView>
         </View>
     );
@@ -47,29 +44,7 @@ const styles = StyleSheet.create({
 
     device: {
 
-
         flexDirection: 'row',
-    },
-    addBtn: {
-        backgroundColor: '#E15233',
-        elevation: 4,
-        width: 100,
-        height: 80,
-        borderRadius: 50,
-
-        position: 'absolute',
-        right: 30,
-        top: 600,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignContent: 'center',
-
-    },
-    addBtnIcon: {
-        fontSize: 30,
-        fontWeight: '600',
-        color: '#fff',
-        elevation: 5,
     },
 
 });

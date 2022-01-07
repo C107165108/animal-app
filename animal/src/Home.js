@@ -70,7 +70,6 @@ export default class Home extends Component {
 
             onRight: () => {
                 Actions.ReportForm({ handleAddReport: this.handleAddReport });
-                console.log('123');
             },
         });
     }
@@ -83,22 +82,14 @@ export default class Home extends Component {
         Actions.push('HelpDetail', { animal: animal });
     };
 
-    // actions detail
-    handleRedirectHelpDetail = (id) => {
-        const { animals } = this.state;
-        const animal = animals.find((animal) => animal.id === id);
-
-        Actions.push('HelpDetail', { animal: animal });
-    };
-
-     // actions detail
+    // actions HelpListwrap
     handleRedirectHelpListwrap = () => {
         const { animals } = this.state;
-        Actions.HelpListwrap( { 
+        Actions.HelpListwrap({
             animals: animals,
-            handleRedirectHelpDetail:this.handleRedirectHelpDetail,
-            handleRedirectHelpEditDetail:this.handleRedirectHelpEditDetail,
-         });
+            handleRedirectHelpDetail: this.handleRedirectHelpDetail,
+            handleRedirectHelpEditDetail: this.handleRedirectHelpEditDetail,
+        });
     };
 
     // update
@@ -115,15 +106,15 @@ export default class Home extends Component {
     render() {
 
         const { animals } = this.state;
-        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail ,  handleRedirectHelpListwrap} = this;
+        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail, handleRedirectHelpListwrap } = this;
 
         return (
             <View style={styles.container}>
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 22.732496753230354,
-                        longitude: 120.34881461036613,
+                        latitude: 22.729890557063307, 
+                        longitude: 120.3555999613627,
                         latitudeDelta: 0.1, //半徑
                         longitudeDelta: 0.05
                     }}
@@ -136,7 +127,7 @@ export default class Home extends Component {
                             coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
                             title={animal.title}
                             description={animal.description}
-                            pinColor={"purple"}
+                            pinColor={"#FA8B70"}
 
                         >
                             <Callout >
@@ -151,16 +142,21 @@ export default class Home extends Component {
                             </Callout>
                         </Marker>
                     ))}
+
+
                 </MapView>
-                <View >
-                    <TouchableOpacity  style={styles.seeAllbtn} onPress={  handleRedirectHelpListwrap}>
-                        <Text style={styles.seeAllbtnText} >查看全部</Text>
-                    </TouchableOpacity></View>
-                <HelpList
-                    style={styles.helpList}
-                    animals={animals}
-                    handleRedirectHelpDetail={handleRedirectHelpDetail}
-                    handleRedirectHelpEditDetail={handleRedirectHelpEditDetail} />
+                <View  style={styles.helpListContent} >
+                    <View style={styles.helpListContent} >
+                        <TouchableOpacity style={styles.seeAllbtn} onPress={handleRedirectHelpListwrap}>
+                            <Text style={styles.seeAllbtnText} >查看全部</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <HelpList
+                        style={styles.helpList}
+                        animals={animals}
+                        handleRedirectHelpDetail={handleRedirectHelpDetail}
+                        handleRedirectHelpEditDetail={handleRedirectHelpEditDetail} />
+                </View>
             </View>
         );
     }
@@ -177,22 +173,28 @@ const styles = StyleSheet.create({
     },
     map: {
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height - 100,
+        height: Dimensions.get("window").height +90,
     },
     marker: {
         width: 50,
         height: 50,
     },
+
+    helpListContent:{
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
     seeAllbtn: {
-        marginTop:20,
-        alignItems:'flex-end',
+        marginTop: 20,
+        marginRight:16,
+        alignItems: 'flex-end',
 
     },
-    seeAllbtnText:{
-        color:"#E15233",
+    seeAllbtnText: {
+        color: "#FA8B70",
     },
     helpList: {
         position: 'relative',
-        bottom: 50,
+        bottom: 100,
     },
 })

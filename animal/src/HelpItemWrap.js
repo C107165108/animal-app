@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 
 
-export default function HelpItem(props) {
+export default function HelpItemWrap(props) {
 
 
     const { animal, onPress,onLongPress } = props;
@@ -28,8 +28,9 @@ export default function HelpItem(props) {
 const styles = StyleSheet.create({
     deviceItem: {
         backgroundColor: '#FFF',
-        justifyContent: 'center',
+
         width: 172,
+        height: 240,
         borderRadius: 20,
         marginHorizontal: 8,
         marginVertical: 8,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     },
     cityText: {
         fontSize: 12,
-        color: '#E15233',
+        color: '#FA8B70',
         marginVertical: 4,
         marginHorizontal: 16,
     },

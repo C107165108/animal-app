@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import HelpItem from './HelpItem';
+import HelpItemWrap from './HelpItemWrap';
 
 export default function HelpListwrap(props) {
 
@@ -13,7 +13,7 @@ export default function HelpListwrap(props) {
                 <View style={styles.device}>
                     {
                         animals.map((animal) =>
-                            <HelpItem
+                            <HelpItemWrap
                                 key={animal.id}
                                 animal={animal}
                                 onPress={handleRedirectHelpDetail}
@@ -22,10 +22,11 @@ export default function HelpListwrap(props) {
 
                     }
                 </View>
-                <TouchableOpacity style={styles.addBtn}>
+                
+            </ScrollView>
+            <TouchableOpacity style={styles.addBtn}>
                     <Text style={styles.addBtnIcon}>+</Text>
                 </TouchableOpacity>
-            </ScrollView>
         </View>
     );
 }
@@ -44,14 +45,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     addBtn: {
-        backgroundColor: '#E15233',
+        backgroundColor: '#FA8B70',
         elevation: 4,
-        width: 100,
-        height: 80,
+      
         borderRadius: 50,
 
         position: 'absolute',
-        right: 30,
+        right: 16,
         top: 600,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -59,7 +59,10 @@ const styles = StyleSheet.create({
 
     },
     addBtnIcon: {
-        fontSize: 30,
+        fontSize: 40,
+        paddingTop:9,
+        paddingBottom:11,
+        paddingHorizontal:35,
         fontWeight: '600',
         color: '#fff',
         elevation: 5,
