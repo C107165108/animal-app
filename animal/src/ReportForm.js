@@ -19,12 +19,12 @@ export default class ReportForm extends React.Component {
             ready: false,
             where: { lat: null, lng: null },
             error: null
-            
+
         };
-        
+
     }
 
-      
+
     componentDidMount() {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
             .then(granted => {
@@ -108,7 +108,7 @@ export default class ReportForm extends React.Component {
     render() {
         const { title, description, phone, species, city, url } = this.state;
         const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleAddPress } = this;
-        const {position} = this.state;
+        const { position } = this.state;
         return (
             <View style={styles.formContent} >
                 <ScrollView>
@@ -165,6 +165,8 @@ export default class ReportForm extends React.Component {
                             <Picker.Item label="高雄市" value="高雄市" />
                         </Picker>
                     </View>
+
+        
                     <TouchableOpacity onPress={handleAddPress} style={styles.submit} >
                         <Text style={styles.submitText}>送出</Text>
                     </TouchableOpacity>

@@ -5,7 +5,7 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { Actions } from 'react-native-router-flux';
 import image from './data';
 import HelpList from './HelpList';
-
+navigator.geolocation = require('@react-native-community/geolocation');
 
 export default class Home extends Component {
 
@@ -13,26 +13,26 @@ export default class Home extends Component {
         super(props);
         this.state = {
             animals: data,
-            Latitude:null,
-            Longitude:null,
+            latitude:null,
+            longitude:null,
         };
     }
     
     componentDidMount() {
-        if (navigator.geolocation) {
+        if(navigator.geolocation) {
           navigator.geolocation.watchPosition(function(position) {
-            console.log("Latitude is :", position.coords.latitude);
-            console.log("Longitude is :", position.coords.longitude);
+            this.setState()({
+                latitude: position.coords.latitude ,
+                longitude:position.coords.longitude ,
+              })
           });
-          this.setState()({
-            Latitude: position.coords.latitude ,
-            Longitude:position.coords.longitude ,
-          })
         }
       }
 
     // 新增資料
     handleAddReport = (animal) => {
+        const  latitude = this.state;
+        const  longitude = this.state;
 
         let year = new Date().getFullYear();
         let month = new Date().getMonth() + 1;
