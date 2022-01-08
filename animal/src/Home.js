@@ -15,6 +15,7 @@ export default class Home extends Component {
             animals: data,
         };
     }
+    
 
     // 新增資料
     handleAddReport = (animal) => {

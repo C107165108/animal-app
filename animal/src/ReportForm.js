@@ -1,9 +1,9 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Actions } from 'react-native-router-flux';
-import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView, Platform, Alert } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-
+import Geolocation from '@react-native-community/geolocation';
 
 export default class ReportForm extends React.Component {
     constructor(props) {
@@ -16,11 +16,33 @@ export default class ReportForm extends React.Component {
             species: '貓',
             city: '高雄市',
             url: null,
+            ready: false,  
+            where: {lat:null, lng:null},  
+            error: null  
         };
     }
+    componentDidMount() {
+        let geoOptions = {
+            enableHighAccuracy: false,
+            timeOut: 20000, //20 second  
+            //  maximumAge: 1000 //1 second  
+        };
+        this.setState({ ready: false, error: null });
+        navigator.geolocation.getCurrentPosition(this.geoSuccess,
+            this.geoFailure,
+            geoOptions);
+    }
+    geoSuccess = (position) => {
+        console.log(position.coords.latitude);
 
-
-    
+        this.setState({
+            ready: true,
+            where: { lat: position.coords.latitude, lng: position.coords.longitude }
+        })
+    }
+    geoFailure = (err) => {
+        this.setState({ error: err.message });
+    }
 
     componentDidMount() {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
@@ -84,7 +106,7 @@ export default class ReportForm extends React.Component {
 
 
 
-  
+
 
     handleAddPress = () => {
         const { handleAddReport } = this.props;
@@ -103,8 +125,8 @@ export default class ReportForm extends React.Component {
 
 
     render() {
-        const { title, description, phone, species, city,  url } = this.state;
-        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity,  handleAddPress } = this;
+        const { title, description, phone, species, city, url } = this.state;
+        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleAddPress } = this;
 
         return (
             <View style={styles.formContent} >
@@ -162,7 +184,34 @@ export default class ReportForm extends React.Component {
                             <Picker.Item label="高雄市" value="高雄市" />
                         </Picker>
                     </View>
+                    {/* <View style={{ marginTop: 10, padding: 10, borderRadius: 10, width: '40%' }}>
+                        <Button
+                            title="Get Location"
+                            onPress={permissionHandle}
 
+                        />
+                    </View>
+                    <Text style={{ color: 'black' }}>Latitude: </Text>
+                    <Text style={{ color: 'black' }}>Longitude: </Text> */}
+                    {/* <View style={{ marginTop: 10, padding: 10, borderRadius: 10, width: '40%' }}>
+                        <Button
+                            title="Send Location"
+                        />
+                    </View> */}
+                    <View style={styles.container}>
+                        {!this.state.ready && (
+                            <Text style={styles.big}>Using Geolocation in React Native.</Text>
+                        )}
+                        {this.state.error && (
+                            <Text style={styles.big}>Error: {this.state.error}</Text>
+                        )}
+                        {this.state.ready && (
+                            <Text style={styles.big}>
+                                Latitude: {this.state.where.lat}
+                                Longitude: {this.state.where.lng}
+                            </Text>
+                        )}
+                    </View>
 
                     <TouchableOpacity onPress={handleAddPress} style={styles.submit} >
                         <Text style={styles.submitText}>送出</Text>
@@ -252,6 +301,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         fontSize: 20,
     },
+        containers: {  
+            flex: 1,  
+            backgroundColor: '#fff',  
+            alignItems: 'center',  
+            justifyContent: 'center'  
+        },  
+        big: {  
+            fontSize: 25  
+        }  
 
 
 });
