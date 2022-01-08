@@ -13,9 +13,23 @@ export default class Home extends Component {
         super(props);
         this.state = {
             animals: data,
+            Latitude:null,
+            Longitude:null,
         };
     }
     
+    componentDidMount() {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(function(position) {
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+          });
+          this.setState()({
+            Latitude: position.coords.latitude ,
+            Longitude:position.coords.longitude ,
+          })
+        }
+      }
 
     // 新增資料
     handleAddReport = (animal) => {
@@ -32,6 +46,8 @@ export default class Home extends Component {
                 {
                     id: this.state.animals.length + 1,
                     time: year + '/' + month + '/' + date + ' ' + hours + ':' + minutes,
+                    latitude:latitude,
+                    longitude:longitude,
                     isEditing: true,
                     ...animal
                 }
