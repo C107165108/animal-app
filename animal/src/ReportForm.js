@@ -3,7 +3,7 @@ import { Picker } from '@react-native-picker/picker';
 import { Actions } from 'react-native-router-flux';
 import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView, Platform, Alert } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-
+navigator.geolocation = require('@react-native-community/geolocation');
 
 export default class ReportForm extends React.Component {
     constructor(props) {
@@ -16,26 +16,37 @@ export default class ReportForm extends React.Component {
             species: '貓',
             city: '高雄市',
             url: null,
-            ready: false,
-            where: { lat: null, lng: null },
-            error: null
-
+            latitude: 0,
+            longitude: 0,
+            error: null,
         };
-
     }
-
 
     componentDidMount() {
-        PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
-            .then(granted => {
-                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                    console.log('已允許使用相機權限');
-                } else {
-                    console.log('已拒絕使用相機權限');
-                }
-            })
-            .catch(error => console.log(error));
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+            },
+            (error) => this.setState({ error: error.message }),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
     }
+
+    // componentDidMount() {
+    //     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
+    //         .then(granted => {
+    //             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    //                 console.log('已允許使用相機權限');
+    //             } else {
+    //                 console.log('已拒絕使用相機權限');
+    //             }
+    //         })
+    //         .catch(error => console.log(error));
+    // }
 
     handleOpenCamera = () => {
         launchCamera({}, this.handleSelectMealImage);
@@ -101,6 +112,9 @@ export default class ReportForm extends React.Component {
             species: '貓',
             city: '高雄市',
             url: null,
+            latitude: null,
+            longitude: null,
+            error: null,
         });
     };
 
@@ -166,7 +180,16 @@ export default class ReportForm extends React.Component {
                         </Picker>
                     </View>
 
-        
+
+                    <View style={{ backgroundColor: 'grey' }}>
+                        <View>
+                            <Text>Latitude: {this.state.latitude}</Text>
+                            <Text>Longitude: {this.state.longitude}</Text>
+                            {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
+                        </View>
+                    </View>
+
+
                     <TouchableOpacity onPress={handleAddPress} style={styles.submit} >
                         <Text style={styles.submitText}>送出</Text>
                     </TouchableOpacity>

@@ -13,26 +13,31 @@ export default class Home extends Component {
         super(props);
         this.state = {
             animals: data,
-            latitude:null,
-            longitude:null,
+            latitude: 0,
+            longitude: 0,
+            error: null,
         };
     }
-    
+
     componentDidMount() {
-        if(navigator.geolocation) {
-          navigator.geolocation.watchPosition(function(position) {
-            this.setState()({
-                latitude: position.coords.latitude ,
-                longitude:position.coords.longitude ,
-              })
-          });
-        }
-      }
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+            },
+            (error) => this.setState({ error: error.message }),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
+    }
+
 
     // 新增資料
     handleAddReport = (animal) => {
-        const  latitude = this.state;
-        const  longitude = this.state;
+        const latitude = this.state.latitude;
+        const longitude = this.state.longitude;
 
         let year = new Date().getFullYear();
         let month = new Date().getMonth() + 1;
@@ -46,8 +51,8 @@ export default class Home extends Component {
                 {
                     id: this.state.animals.length + 1,
                     time: year + '/' + month + '/' + date + ' ' + hours + ':' + minutes,
-                    latitude:latitude,
-                    longitude:longitude,
+                    latitude: latitude,
+                    longitude: longitude,
                     isEditing: true,
                     ...animal
                 }
@@ -93,10 +98,10 @@ export default class Home extends Component {
 
     // 轉換到detail頁面(HelpDetail)
     handleRedirectHelpDetail = (id) => {
-        const { animals } = this.state;
+        const { animals, latitude, longitude } = this.state;
         const animal = animals.find((animal) => animal.id === id);
 
-        Actions.HelpDetail({ animal: animal, handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView });
+        Actions.HelpDetail({ animal: animal, latitude: latitude, longitude: longitude, handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView });
     };
 
     // 轉換到查看全部頁面(HelpListwrap)
@@ -106,7 +111,7 @@ export default class Home extends Component {
             animals: animals,
             handleRedirectHelpDetail: this.handleRedirectHelpDetail,
             handleRedirectHelpEditDetail: this.handleRedirectHelpEditDetail,
-            handleAddReport:this.handleAddReport,
+            handleAddReport: this.handleAddReport,
         });
     };
 
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         position: 'relative',
-        top: Dimensions.get("window").height-370,
+        top: Dimensions.get("window").height - 370,
     },
     seeAllbtn: {
         marginTop: 20,
