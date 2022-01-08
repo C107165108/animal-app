@@ -6,20 +6,18 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 export default function HelpItem(props) {
 
 
-    const { animal, onPress,onLongPress } = props;
+    const { animal, onPress, onLongPress } = props;
 
     return (
         <TouchableOpacity
             onPress={() => onPress(animal.id)}
             onLongPress={() => onLongPress(animal.id)}
             style={styles.deviceItem}>
-
-
             <Image source={{ uri: animal.url }} style={styles.Img} />
             <Text style={styles.title}>{animal.title}</Text>
             <Text style={styles.cityText}>{animal.city}</Text>
             <Text style={styles.timeText}>{animal.time}</Text>
-           
+
         </TouchableOpacity>
     );
 
@@ -28,9 +26,8 @@ export default function HelpItem(props) {
 const styles = StyleSheet.create({
     deviceItem: {
         backgroundColor: '#FFF',
-
-        width: 160,
-        height: 240,
+        width: 172,
+        height: 235,
         borderRadius: 20,
         marginHorizontal: 8,
         marginVertical: 4,
@@ -38,7 +35,7 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     Img: {
-        width: 160,
+        width: 172,
         height: 140,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,

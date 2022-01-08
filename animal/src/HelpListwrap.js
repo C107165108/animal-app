@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import HelpItemWrap from './HelpItemWrap';
+import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
 
 export default function HelpListwrap(props) {
@@ -14,7 +14,7 @@ export default function HelpListwrap(props) {
                 <View style={styles.device}>
                     {
                         animals.map((animal) =>
-                            <HelpItemWrap
+                            <HelpItem
                                 key={animal.id}
                                 animal={animal}
                                 onPress={handleRedirectHelpDetail}
@@ -25,7 +25,7 @@ export default function HelpListwrap(props) {
                 </View>
                 
             </ScrollView>
-            <TouchableOpacity style={styles.addBtn} onPress={  Actions.ReportForm({ handleAddReport: handleAddReport })}>
+            <TouchableOpacity style={styles.addBtn} onPress={ ()=> Actions.ReportForm({ handleAddReport: handleAddReport })}>
                     <Text style={styles.addBtnIcon}>+</Text>
                 </TouchableOpacity>
         </View>

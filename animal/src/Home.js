@@ -230,7 +230,4 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         fontWeight: '600',
     },
-    helpList: {
-
-    },
 })
