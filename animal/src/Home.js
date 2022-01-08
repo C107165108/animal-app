@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import data from './data';
-import { StyleSheet, Dimensions, Animated, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Dimensions, View, Text, TouchableOpacity, Linking, Image } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { Actions } from 'react-native-router-flux';
-import image from './data';
+import { WebView } from 'react-native-webview';
+import icon from './data';
 import HelpList from './HelpList';
 navigator.geolocation = require('@react-native-community/geolocation');
+
+const telURL = 'tel:0912345678';
 
 export default class Home extends Component {
 
@@ -13,11 +16,15 @@ export default class Home extends Component {
         super(props);
         this.state = {
             animals: data,
+            icon: icon.icon,
             latitude: 0,
             longitude: 0,
             error: null,
         };
     }
+    handleOpenURL = (url) => Linking.openURL(url);
+
+
 
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(
@@ -83,17 +90,23 @@ export default class Home extends Component {
                 ...this.state.animals
             ]
         });
+
     }
 
     // 轉換到新增頁面
-    componentDidMount() {
-        this.props.navigation.setParams({
-            rightTitle: '新增',
+    // componentDidMount() {
+    //     this.props.navigation.setParams({
+    //         rightTitle: 'vu',
 
-            onRight: () => {
-                Actions.ReportForm({ handleAddReport: this.handleAddReport });
-            },
-        });
+    //         onRight: () => {
+    //             Actions.ReportForm({ handleAddReport: this.handleAddReport });
+    //         },
+    //     });
+    // }
+
+    // 轉換到新增頁面
+    handleRedirectReportForm = () => {
+        Actions.ReportForm({ handleAddReport: this.handleAddReport });
     }
 
     // 轉換到detail頁面(HelpDetail)
@@ -106,9 +119,10 @@ export default class Home extends Component {
 
     // 轉換到查看全部頁面(HelpListwrap)
     handleRedirectHelpListwrap = () => {
-        const { animals } = this.state;
+        const { animals, icon } = this.state;
         Actions.HelpListwrap({
             animals: animals,
+            icon: icon,
             handleRedirectHelpDetail: this.handleRedirectHelpDetail,
             handleRedirectHelpEditDetail: this.handleRedirectHelpEditDetail,
             handleAddReport: this.handleAddReport,
@@ -121,7 +135,7 @@ export default class Home extends Component {
         const animal = animals.find((animal) => animal.id === id);
 
         Actions.HelpEditDetail({
-            animal: animal, image: image,
+            animal: animal,
             handleUpdateReport: this.handleUpdateReport, handleDeleteReport: this.handleDeleteReport
         });
     };
@@ -129,10 +143,11 @@ export default class Home extends Component {
     render() {
 
         const { animals } = this.state;
-        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail, handleRedirectHelpListwrap } = this;
+        const { handleRedirectHelpDetail, handleRedirectHelpEditDetail, handleRedirectHelpListwrap, handleRedirectReportForm, handleOpenURL } = this;
 
         return (
             <View style={styles.container}>
+
                 <MapView
                     style={styles.map}
                     initialRegion={{
@@ -143,44 +158,57 @@ export default class Home extends Component {
                     }}
                     provider="google"
                 >
-
                     {animals.map((animal, index) => (
                         <Marker
                             key={index}
                             coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
-                            title={animal.title}
-                            description={animal.description}
-                            pinColor={"#FA8B70"}
+                            image={require('./images/marker.png')}
 
                         >
-                            <Callout >
-
-                                <Animated.View style={[styles.markerWrap]}>
-                                    <Animated.Image
-                                        source={require('./images/cat1.jpeg')}
-                                        style={styles.marker}
-                                    // resizeMode="cover"
-                                    />
-                                </Animated.View>
+                            <Callout tooltip>
+                                <View style={styles.callOut}>
+                                    <Text style={styles.callOutText}>  {animal.title}</Text>
+                                    {/* <Text >
+                                        <Image style={styles.callOutImg} source={{ uri: animal.url }} />
+                                    </Text> */}
+                                    <View style={{ flex: 1 }}>
+                                        <WebView style={styles.callOutImg} source={{ uri: animal.url }} />
+                                    </View>
+                                </View>
                             </Callout>
                         </Marker>
                     ))}
 
-
                 </MapView>
+
                 <View style={styles.helpListContent} >
+
+                    <TouchableOpacity style={styles.addBtn} onPress={handleRedirectReportForm}>
+                        {/* <Text style={styles.addBtnIcon} >+</Text> */}
+                        <Image style={styles.addBtnIcon} source={require('./images/add.png')}></Image>
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity style={styles.addBtn} onPress={() => handleOpenURL(telURL)}>
+                        {/* <Text style={styles.addBtnIcon} >☼</Text> */}
+                        <Image style={styles.addBtnIcon} source={require('./images/phoneicon.png')}></Image>
+                    </TouchableOpacity>
+
                     <View >
                         <TouchableOpacity style={styles.seeAllbtn} onPress={handleRedirectHelpListwrap}>
                             <Text style={styles.seeAllbtnText} >查看全部</Text>
                         </TouchableOpacity>
                     </View>
+
                     <HelpList
                         style={styles.helpList}
                         animals={animals}
                         handleRedirectHelpDetail={handleRedirectHelpDetail}
                         handleRedirectHelpEditDetail={handleRedirectHelpEditDetail}
                     />
+
                 </View>
+
             </View>
         );
     }
@@ -200,21 +228,57 @@ const styles = StyleSheet.create({
         height: Dimensions.get("window").height,
         position: 'absolute',
     },
-    marker: {
-        width: 50,
-        height: 50,
+    callOut: {
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingHorizontal: 18,
+        paddingVertical: 12,
+        borderRadius: 20,
+        flexDirection: 'column',
+        marginBottom: 5,
+    },
+    callOutText: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: 'black'
+    },
+    callOutImg: {
+        height: 120,
+        width: 120,
+        borderRadius: 20,
     },
 
     helpListContent: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        top: Dimensions.get("window").height - 440,
         position: 'relative',
-        top: Dimensions.get("window").height - 370,
+        left: 0,
+
+    },
+
+    addBtn: {
+        backgroundColor: '#FA8B70',
+        elevation: 4,
+        borderRadius: 50,
+        width: 70,
+        height: 70,
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        alignContent: 'flex-end',
+        marginTop: 8,
+        position: 'relative',
+        left: 325,
+    },
+
+    addBtnIcon: {
+        width: 30,
+        height: 30,
+        justifyContent: 'center',
     },
     seeAllbtn: {
         marginTop: 20,
         marginRight: 16,
-
         width: 100,
         borderRadius: 50,
         backgroundColor: '#fff',
@@ -230,4 +294,5 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         fontWeight: '600',
     },
+
 })

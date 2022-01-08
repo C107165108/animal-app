@@ -15,9 +15,8 @@ export default function HelpItem(props) {
             style={styles.deviceItem}>
             <Image source={{ uri: animal.url }} style={styles.Img} />
             <Text style={styles.title}>{animal.title}</Text>
-            <Text style={styles.cityText}>{animal.city}</Text>
+            <Text style={styles.cityText}>{animal.city} {animal.region}</Text>
             <Text style={styles.timeText}>{animal.time}</Text>
-
         </TouchableOpacity>
     );
 
@@ -49,7 +48,8 @@ const styles = StyleSheet.create({
     },
     cityText: {
         fontSize: 12,
-        color: '#E15233',
+        fontWeight:'600',
+        color: '#FA8B70',
         marginVertical: 4,
         marginHorizontal: 16,
     },

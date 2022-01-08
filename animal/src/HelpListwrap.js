@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image } from 'react-native';
 import HelpItem from './HelpItem';
 import { Actions } from 'react-native-router-flux';
 
 export default function HelpListwrap(props) {
 
     const { animals } = props;
-    const { handleRedirectHelpDetail, handleRedirectHelpEditDetail,handleAddReport } = props;
+    const { handleRedirectHelpDetail, handleRedirectHelpEditDetail, handleAddReport } = props;
 
     return (
         <View style={styles.listcontent}>
@@ -23,11 +23,12 @@ export default function HelpListwrap(props) {
 
                     }
                 </View>
-                
+
             </ScrollView>
-            <TouchableOpacity style={styles.addBtn} onPress={ ()=> Actions.ReportForm({ handleAddReport: handleAddReport })}>
-                    <Text style={styles.addBtnIcon}>+</Text>
-                </TouchableOpacity>
+            {/* <TouchableOpacity style={styles.addBtn} onPress={() => Actions.ReportForm({ handleAddReport: handleAddReport })}>
+                <Text style={styles.addBtnIcon}>+</Text>
+                
+            </TouchableOpacity> */}
         </View>
     );
 }
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     addBtn: {
         backgroundColor: '#FA8B70',
         elevation: 4,
-      
+
         borderRadius: 50,
 
         position: 'absolute',
@@ -61,10 +62,9 @@ const styles = StyleSheet.create({
     },
     addBtnIcon: {
         fontSize: 40,
-        paddingTop:9,
-        paddingBottom:11,
-        paddingHorizontal:35,
-        fontWeight: '600',
+        paddingTop: 7,
+        paddingBottom: 11,
+        paddingHorizontal: 35,
         color: '#fff',
         elevation: 5,
     },

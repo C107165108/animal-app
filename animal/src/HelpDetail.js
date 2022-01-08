@@ -3,40 +3,59 @@ import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-nat
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StreetView from 'react-native-streetview';
 import { Actions } from 'react-native-router-flux';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { WebView } from 'react-native-webview';
 
 
 export default function HelpDetail(props) {
     const { animal, handleRedirectHelpDetailStrettView } = props;
     return (
         <View style={styles.content} >
-            <Image style={styles.image} source={{ uri: animal.url }}></Image>
-            <View style={styles.information}>
-                <Text style={styles.title}>{animal.title}</Text>
-                <Image style={styles.phoneicon}
-                    source={{ uri: 'https://cdn-icons-png.flaticon.com/512/1/1257.png' }} />
-                <Text style={styles.phoneText}>{animal.phone}</Text>
-                <Text style={styles.descriptionText}>{animal.description}</Text>
+            <ScrollView>
+                <Image style={styles.image} source={{ uri: animal.url }}></Image>
+                <View style={styles.information}>
+                    <View style={styles.informationContent}>
+                        <View>
+                            <View style={styles.titleContent}>
+                                <Text style={styles.title}>{animal.title}</Text>
+                                <Text style={styles.cityText}>{animal.city} {animal.region}</Text>
+                            </View>
 
-                <View>
-                    <StreetView
-                        style={styles.streetView}
-                        allGesturesEnabled={true}
-                        coordinate={{
-                            latitude: animal.latitude,
-                            longitude: animal.longitude,
-                        }}
-                        pov={{
-                            tilt: parseFloat(0),
-                            bearing: parseFloat(0),
-                            zoom: parseInt(1),
-                        }}
+                            <View style={styles.phoneContent}>
+                                <Image style={styles.phoneIcon} source={require('./images/phone.png')}></Image>
+                                <Text style={styles.phoneText}>{animal.phone}</Text>
+                            </View>
 
-                    />
-                    <TouchableOpacity style={styles.seeAllbtn} >
-                        <Text style={styles.seeAllbtnText} onPress={() => Actions.HelpDetailStrettView({ animal: animal })} >查看街景 →</Text>
-                    </TouchableOpacity>
+                            <Text style={styles.descriptionText}>{animal.description}</Text>
+                        </View>
+
+
+
+                        <MapView
+                            style={styles.map}
+                            initialRegion={{
+                                latitude: 22.729890557063307,
+                                longitude: 120.3555999613627,
+                                latitudeDelta: 0.1, //半徑
+                                longitudeDelta: 0.05
+                            }}
+                            provider="google"
+                        >
+                            <Marker
+                                coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
+                                image={require('./images/marker.png')}
+                            />
+                        </MapView>
+
+                        <View style={styles.seeAllbtnContent}>
+                            <TouchableOpacity style={styles.seeAllbtn} >
+                                <Text style={styles.seeAllbtnText} onPress={() => Actions.HelpDetailStrettView({ animal: animal })} > 查看街景 →</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </View>
     );
 }
@@ -45,7 +64,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginVertical: 16,
     },
-
     container: {
         flex: 1,
         justifyContent: 'space-between',
@@ -56,53 +74,87 @@ const styles = StyleSheet.create({
     image: {
         width: Dimensions.get('window').width - 32,
         height: Dimensions.get('window').height / 3.5,
-        borderRadius: 20,
-        position: 'relative',
+        borderRadius: 40,
+        marginBottom: 16,
     },
     information: {
-        marginHorizontal: 8,
+        alignItems: "center",
     },
 
+    informationContent: {
+        marginHorizontal: 4,
+        marginVertical: 4,
+        height: Dimensions.get('window').height / 1.75,
+        justifyContent: 'space-between',
+        alignContent: 'space-between',
+
+    },
     title: {
         fontSize: 30,
         fontWeight: '600',
         color: 'black',
-        marginTop: 16,
-
+        marginTop: 4,
     },
-    phoneicon: {
-        width: 100,
-    },
-    phoneText: {
+    phoneContent: {
+        flexDirection: 'row',
         marginTop: 8,
+        alignContent: 'center',
     },
+    phoneIcon: {
+        width: 20,
+        height: 20,
+        marginRight: 8,
+    },
+
     descriptionText: {
         marginTop: 8,
         marginBottom: 16,
     },
+    map: {
+        width: Dimensions.get("window").width - 32,
+        height: Dimensions.get("window").height / 4,
+        alignItems: "center",
+    },
     streetView: {
-        width: Dimensions.get('window').width - 40,
+        width: Dimensions.get('window').width - 60,
         height: Dimensions.get('window').height / 4,
-        position: 'absolute',
+    },
+    seeAllbtnContent: {
+        alignItems: 'flex-end',
     },
     seeAllbtn: {
-
-
-        width: 100,
+        width: Dimensions.get('window').width - 40,
         borderRadius: 50,
-        backgroundColor: '#fff',
-        position: 'relative',
-        left: 16,
-        top: 45,
+        backgroundColor: '#FA8B70',
         alignItems: "center",
-        justifyContent: "center",
-        elevation: 4,
-
     },
     seeAllbtnText: {
-        color: "#FA8B70",
-        paddingVertical: 12,
+        color: "#fff",
+        paddingVertical: 16,
         fontWeight: '600',
+    },
+    cityText: {
+        fontSize: 12,
+        fontWeight: '600',
+        color: '#fff',
+        marginVertical: 8,
+        marginHorizontal: 4,
+        backgroundColor: '#FA8B70',
+
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+        width: 120,
+        justifyContent: 'center',
+        alignContent: 'center',
+        marginLeft: 16,
+    },
+    titleContent: {
+        flexDirection: 'row',
+        alignContent: 'space-between',
+        justifyContent: 'space-between',
+        marginTop: 12,
+
     },
 
 
