@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StreetView from 'react-native-streetview';
+import { Actions } from 'react-native-router-flux';
 
 
 export default function HelpDetail(props) {
-    const { animal ,handleRedirectHelpDetailStrettView} = props;
+    const { animal, handleRedirectHelpDetailStrettView } = props;
     return (
         <View style={styles.content} >
             <Image style={styles.image} source={{ uri: animal.url }}></Image>
@@ -31,9 +32,9 @@ export default function HelpDetail(props) {
                         }}
 
                     />
-                     <TouchableOpacity style={styles.seeAllbtn} >
-                            <Text style={styles.seeAllbtnText} onPress={handleRedirectHelpDetailStrettView} >查看街景 →</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.seeAllbtn} >
+                        <Text style={styles.seeAllbtnText} onPress={() => Actions.HelpDetailStrettView({ animal: animal })} >查看街景 →</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         marginTop: 8,
-        marginBottom:16,
+        marginBottom: 16,
     },
     streetView: {
         width: Dimensions.get('window').width - 40,
@@ -85,14 +86,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     seeAllbtn: {
-       
+
 
         width: 100,
         borderRadius: 50,
         backgroundColor: '#fff',
         position: 'relative',
-        left:16,
-        top:45,
+        left: 16,
+        top: 45,
         alignItems: "center",
         justifyContent: "center",
         elevation: 4,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         fontWeight: '600',
     },
-   
+
 
 });
 

@@ -16,7 +16,7 @@ export default class Home extends Component {
         };
     }
 
-    // 新增
+    // 新增資料
     handleAddReport = (animal) => {
 
         let year = new Date().getFullYear();
@@ -46,7 +46,7 @@ export default class Home extends Component {
     //     });
     // }
 
-    // 刪除
+    // 刪除資料
     handleDeleteReport = (id) => {
         let { animals } = this.state;
         animals.id !== id;
@@ -54,7 +54,7 @@ export default class Home extends Component {
         console.log('delete')
     }
 
-    // 新增
+    // 更新資料
     handleUpdateReport = () => {
         this.setState({
             animals: [
@@ -63,7 +63,7 @@ export default class Home extends Component {
         });
     }
 
-    // action 新增
+    // 轉換到新增頁面
     componentDidMount() {
         this.props.navigation.setParams({
             rightTitle: '新增',
@@ -74,7 +74,7 @@ export default class Home extends Component {
         });
     }
 
-    // actions detail
+    // 轉換到detail頁面(HelpDetail)
     handleRedirectHelpDetail = (id) => {
         const { animals } = this.state;
         const animal = animals.find((animal) => animal.id === id);
@@ -82,23 +82,18 @@ export default class Home extends Component {
         Actions.HelpDetail({ animal: animal, handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView });
     };
 
-    handleRedirectHelpDetailStrettView = (id) => {
-        const { animals } = this.state;
-        const animal = animals.find((animal) => animal.id === id);
-        Actions.HelpDetailStrettView({ animal: animal });
-    };
-
-    // actions HelpListwrap
+    // 轉換到查看全部頁面(HelpListwrap)
     handleRedirectHelpListwrap = () => {
         const { animals } = this.state;
         Actions.HelpListwrap({
             animals: animals,
             handleRedirectHelpDetail: this.handleRedirectHelpDetail,
             handleRedirectHelpEditDetail: this.handleRedirectHelpEditDetail,
+            handleAddReport:this.handleAddReport,
         });
     };
 
-    // update
+    // 轉換到編輯頁面(HelpEditDetail)
     handleRedirectHelpEditDetail = (id) => {
         const { animals } = this.state;
         const animal = animals.find((animal) => animal.id === id);
@@ -192,7 +187,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         position: 'relative',
-        top: 450,
+        top: Dimensions.get("window").height-370,
     },
     seeAllbtn: {
         marginTop: 20,
