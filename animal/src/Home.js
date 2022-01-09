@@ -162,6 +162,7 @@ export default class Home extends Component {
 
         return (
             <View style={styles.container}>
+                
 
                 <MapView
                     style={styles.map}
@@ -173,6 +174,7 @@ export default class Home extends Component {
                     }}
                     provider="google"
                 >
+                    
                     {animals.map((animal, index) => (
                         <Marker
                             key={index}

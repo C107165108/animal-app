@@ -14,42 +14,39 @@ import HelpDetailStrettView from './HelpDetailStrettView';
 //     <Image source={require('./images/cat1.jpeg')} style={{withe:20,height:20,}}/>
 // )
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={require('./images/cat1.jpeg')}
-    />
-  );
-}
+
 
 export default function Routes() {
 
   return (
-    <Router navigationBarStyle={{ backgroundColor: '#fff', opacity: 50, height: 70, elevation: 0, }} >
+    <Router showLabel={false} navigationBarStyle={{ backgroundColor: '#fff', opacity: 50, height: 70, elevation: 0, }}headerLayoutPreset={'center'} >
 
-      <Stack key="root" title='列表'  >
-        <Scene key="Home" component={Home} options={{ headerTitle: (props) => <LogoTitle {...props} /> }}
-          title="stray animal"
-          // icon={icon}
-          // renderTitle={() => (
-          //     <View>
-          //       <Image style={styles.headerLogo} source={require('./images/marker.png')} />
-          //     </View>
-          //   )}
+      <Stack key="root" title='列表'
+
+      >
+        <Scene key="Home" component={Home}
+          title="HELP&HELP"
           titleStyle={{
-            color: '#FA8B70',
+            color: '#fff',
             fontSize: 22,
             fontWeight: '700',
             marginTop: 16,
             marginBottom: 8,
+            letterSpacing:5,
+
+          }}
+          navigationBarStyle={{
+            backgroundColor: 'rgba(253, 143, 116, 0.95)',
+            opacity: 50,
+            height: 70,
+            elevation: 0
           }}
           initial />
 
-        <Scene key="HelpList" component={HelpList} title="HelpList" back />
-        <Scene key="HelpListwrap" component={HelpListwrap} title="HelpListwrap" back />
-        <Scene key="ReportForm" component={ReportForm} title="ReportForm" back />
-        <Scene key="HelpDetail" component={HelpDetail} title="HelpDetail" back />
+        <Scene key="HelpList" component={HelpList} title="HELP&HELP" back />
+        <Scene key="HelpListwrap" component={HelpListwrap} title="HELP&HELP" back />
+        <Scene key="ReportForm" component={ReportForm} title="新增" back />
+        <Scene key="HelpDetail" component={HelpDetail} title="HELP&HELP" back />
         <Scene key="HelpDetailStrettView" component={HelpDetailStrettView} title="查看街景" back />
         <Scene key="HelpEditDetail" component={HelpEditDetail} title="編輯" back />
       </Stack>

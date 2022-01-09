@@ -212,6 +212,7 @@ export default class ReportForm extends React.Component {
                                 <Picker.Item label="鼓山區" value="鼓山區" />
                                 <Picker.Item label="風山區" value="風山區" />
                                 <Picker.Item label="前鎮區" value="前鎮區" />
+                                <Picker.Item label="大社區" value="大社區" />
                             </Picker>
                         </View>
 

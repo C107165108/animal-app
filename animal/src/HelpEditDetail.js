@@ -8,6 +8,8 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 export default class HelpEditDetail extends React.Component {
 
+
+
     componentDidMount() {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
             .then(granted => {
@@ -24,14 +26,10 @@ export default class HelpEditDetail extends React.Component {
         launchCamera({}, this.handleSelectImage);
     };
 
-    handleOpenImageLibrary = () => {
-        launchImageLibrary({}, this.handleSelectImage);
-    };
-
     handleSelectImage = (response) => {
         const { didCancel, assets } = response;
         if (!didCancel) {
-            this.setState({ url: assets.uri });
+            this.setState({ uri: assets.url });
         }
     };
 
@@ -132,6 +130,7 @@ export default class HelpEditDetail extends React.Component {
     render() {
         const { animal } = this.props;
         const { handleDeleteReport } = this.props;
+        const { url } = this.props.animal;
 
         const {
             handleUpdateTitle,
@@ -149,7 +148,14 @@ export default class HelpEditDetail extends React.Component {
                     <View >
                         <View style={styles.imageHeader}>
                             <Image
-                                source={{ uri: !animal.url ? animal.url : animal.url }}
+                                source={{
+                                    uri: !url
+                                        ?
+                                        url
+                                        :
+                                        url
+                                }}
+                                defaultSource={{uri:url}}
                                 style={styles.image}
                             />
 
@@ -215,11 +221,12 @@ export default class HelpEditDetail extends React.Component {
                                 <Picker.Item label="鼓山區" value="鼓山區" />
                                 <Picker.Item label="風山區" value="風山區" />
                                 <Picker.Item label="前鎮區" value="前鎮區" />
+                                <Picker.Item label="大社區" value="大社區" />
                             </Picker>
                         </View>
 
                         <View style={styles.btnGroup}>
-                            <TouchableOpacity onPress={()=>handleDeleteReport(animal.id)} style={styles.delete} >
+                            <TouchableOpacity onPress={() => handleDeleteReport(animal.id)} style={styles.delete} >
                                 <Image style={styles.deleteIcon} source={require('./images/delete.png')}></Image>
 
                             </TouchableOpacity>

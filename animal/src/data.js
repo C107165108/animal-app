@@ -12,12 +12,6 @@ export const icon = {
 
 }
 
-
-
-
-
-
-
 const data = [
     {
         id: 1,
@@ -31,7 +25,7 @@ const data = [
         latitude: 22.732496753230354,
         longitude: 120.34881461036613,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: true,
     },
@@ -44,10 +38,10 @@ const data = [
         locationdescript: '在柵欄旁邊民生東路',
         phone: '0911111111',
         species: '狗',
-        latitude: 22.72607695548508,
-        longitude: 120.35457867690084,
+        latitude: 22.735314261898633, 
+        longitude: 120.33770502446104,
         city: '高雄市',
-        region: '前金區',
+        region: '三民區',
         time: '2022/1/1 22:30',
         isEditing: true,
     },
@@ -63,7 +57,7 @@ const data = [
         latitude: 22.74206313441683,
         longitude: 120.36692686563069,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },
@@ -79,7 +73,7 @@ const data = [
         latitude: 22.72491175454945,
         longitude: 120.35265805349687,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },
@@ -92,10 +86,10 @@ const data = [
         locationdescript: '在柵欄旁邊民生東路',
         phone: '0911111111',
         species: '貓',
-        latitude: 2.724485633669225,
-        longitude: 120.34771574654229,
+        latitude: 22.716163552060955, 
+        longitude: 120.34149920944454,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },
@@ -111,7 +105,7 @@ const data = [
         latitude: 22.718645579647752,
         longitude: 120.33050048131972,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },
@@ -124,10 +118,10 @@ const data = [
         locationdescript: '在柵欄旁邊民生東路',
         phone: '0911111111',
         species: '狗',
-        latitude: 22.711431409805435,
-        longitude: 120.34252829199153,
+        latitude: 22.70828862470128, 
+        longitude: 120.35151164203985,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },
@@ -143,7 +137,7 @@ const data = [
         latitude: 22.716266917323246,
         longitude: 120.36661714872535,
         city: '高雄市',
-        region: '前金區',
+        region: '大社區',
         time: '2022/1/1 22:30',
         isEditing: false,
     },

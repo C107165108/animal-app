@@ -160,8 +160,10 @@ const styles = StyleSheet.create({
     },
     seeAllbtnText: {
         color: "#fff",
-        paddingVertical: 16,
+        paddingVertical: 18,
         fontWeight: '600',
+        letterSpacing:2,
+        fontSize:16,
     },
     cityText: {
         fontSize: 12,
