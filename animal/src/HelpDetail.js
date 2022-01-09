@@ -10,15 +10,6 @@ import { WebView } from 'react-native-webview';
 
 export default function HelpDetail(props) {
 
-    function MarkerAnimal() {
-        const { animal } = props;
-        return
-    }
-    function MarkerNew() {
-        const { latitude, longitude } = props;
-        return
-    }
-
     const { animal, latitude, longitude } = props;
     return (
         <View style={styles.content} >
@@ -62,31 +53,22 @@ export default function HelpDetail(props) {
                             provider="google"
                         >
 
-                            {/* {animal.latitude === null
-                                ? <Marker
-                                    coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
-                                    image={require('./images/marker.png')}
-                                />
-                                : <Marker
-                                    coordinate={{ latitude: latitude, longitude: longitude }}
-                                    image={require('./images/marker.png')}
-                                />} */}
-
-                            {animal.latitude === null
+                            {animal.latitude === 0
                                 ?
+                                // console.log(latitude,longitude)
+
                                 <Marker
                                     coordinate={{ latitude: latitude, longitude: longitude }}
                                     image={require('./images/marker.png')}
                                 />
                                 :
+                                // console.log(animal.latitude,animal.longitude)
                                 <Marker
                                     coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
                                     image={require('./images/marker.png')}
-                                />}
-                            {/* <Marker
-                                coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
-                                image={require('./images/marker.png')}
-                            /> */}
+                                />
+                                }
+                         
 
                         </MapView>
 

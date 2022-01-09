@@ -10,7 +10,7 @@ export default function HelpDetailStrettView(props) {
 
 
             <View>
-                {animal.latitude === null
+                {animal.latitude === 0
                     ?
                     <StreetView
                         style={styles.streetView}
