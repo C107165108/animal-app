@@ -31,13 +31,13 @@ export default class Home extends Component {
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                console.log(position.coords.latitude,position.coords.longitude);
+                console.log(position.coords.latitude, position.coords.longitude);
                 this.setState({
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                     error: null,
                 });
-                console.log(this.state.latitude,this.state.longitude)
+                console.log(this.state.latitude, this.state.longitude)
             },
             (error) => this.setState({ error: error.message }),
             { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
@@ -81,11 +81,13 @@ export default class Home extends Component {
 
     // 刪除資料
     handleDeleteReport = (id) => {
+
         let { animals } = this.state;
-        animals.id !== id;
-        this.setState({
-            animals
-        });
+        let remove = animals.filter((animal) => animal.id !== id);
+        console.log(remove)
+        this.setState(
+            { animals: remove }
+        );
     }
 
     // 更新資料
@@ -127,7 +129,7 @@ export default class Home extends Component {
             longitude: longitude,
             handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView
         });
-        console.log(latitude,longitude)
+        console.log(latitude, longitude)
     };
 
     // 轉換到查看全部頁面(HelpListwrap)

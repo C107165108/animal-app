@@ -72,6 +72,13 @@ export default class HelpEditDetail extends React.Component {
     };
 
 
+    handleChangeSpecies = (species) => {
+        let { animal } = this.props;
+        animal.species = species;
+        this.setState({
+            animal
+        });
+    }
 
     handleChangeCity = (city) => {
         let { animal } = this.props;
@@ -93,13 +100,12 @@ export default class HelpEditDetail extends React.Component {
     // 刪除
     handleDeletePress = () => {
         const { handleDeleteReport } = this.props;
-        animal = () => handleDelete(id);
+        let { animal } = this.props;
         Actions.pop();
+        console.log(animal.id);
+        this.setState(
+            handleDeleteReport(animal.id));
 
-        handleDeleteReport(this.state);
-        this.setState({
-            animal
-        });
     };
 
     //更新
@@ -125,7 +131,17 @@ export default class HelpEditDetail extends React.Component {
 
     render() {
         const { animal } = this.props;
-        const { handleUpdateTitle, handleUpdateDescription, handleUpdatePhone, handleUpdatePress, handleChangeSpecies, handleChangeCity, handleDeletePress, handleChangeRegion, handleUpdateLocationdescription } = this;
+        const { handleDeleteReport } = this.props;
+
+        const {
+            handleUpdateTitle,
+            handleUpdateDescription,
+            handleUpdatePhone,
+            handleUpdatePress,
+            handleChangeSpecies,
+            handleChangeCity,
+            handleChangeRegion,
+            handleUpdateLocationdescription } = this;
         return (
             <View style={styles.formContent} >
                 <ScrollView>
@@ -203,7 +219,7 @@ export default class HelpEditDetail extends React.Component {
                         </View>
 
                         <View style={styles.btnGroup}>
-                            <TouchableOpacity onPress={handleDeletePress} style={styles.delete} >
+                            <TouchableOpacity onPress={()=>handleDeleteReport(animal.id)} style={styles.delete} >
                                 <Image style={styles.deleteIcon} source={require('./images/delete.png')}></Image>
 
                             </TouchableOpacity>
