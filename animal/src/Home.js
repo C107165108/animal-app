@@ -22,10 +22,12 @@ export default class Home extends Component {
             error: null,
         };
     }
+
+    // 電話鍵
     handleOpenURL = (url) => Linking.openURL(url);
 
 
-
+    // 新增經緯度
     componentDidMount() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -79,8 +81,9 @@ export default class Home extends Component {
     handleDeleteReport = (id) => {
         let { animals } = this.state;
         animals.id !== id;
-        this.setState({ animals });
-        console.log('delete')
+        this.setState({
+            animals
+        });
     }
 
     // 更新資料
@@ -106,7 +109,9 @@ export default class Home extends Component {
 
     // 轉換到新增頁面
     handleRedirectReportForm = () => {
-        Actions.ReportForm({ handleAddReport: this.handleAddReport });
+        Actions.ReportForm({
+            handleAddReport: this.handleAddReport
+        });
     }
 
     // 轉換到detail頁面(HelpDetail)
@@ -114,7 +119,12 @@ export default class Home extends Component {
         const { animals, latitude, longitude } = this.state;
         const animal = animals.find((animal) => animal.id === id);
 
-        Actions.HelpDetail({ animal: animal, latitude: latitude, longitude: longitude, handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView });
+        Actions.HelpDetail({
+            animal: animal,
+            latitude: latitude,
+            longitude: longitude,
+            handleRedirectHelpDetailStrettView: this.handleRedirectHelpDetailStrettView
+        });
     };
 
     // 轉換到查看全部頁面(HelpListwrap)
@@ -221,12 +231,14 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
+        marginTop: 0,
 
     },
     map: {
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
         position: 'absolute',
+
     },
     callOut: {
         flex: 1,
@@ -235,17 +247,21 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderRadius: 20,
         flexDirection: 'column',
+        alignItems: "center",
         marginBottom: 5,
     },
     callOutText: {
         fontSize: 20,
         fontWeight: '600',
-        color: 'black'
+        color: 'black',
+
     },
     callOutImg: {
         height: 120,
         width: 120,
         borderRadius: 20,
+        marginTop: 0,
+        backgroundColor: '#fff',
     },
 
     helpListContent: {

@@ -53,6 +53,16 @@ export default class HelpEditDetail extends React.Component {
         });
     };
 
+    handleUpdateLocationdescription = (locationdescript) => {
+        let { animal } = this.props;
+        animal.locationdescript = locationdescript;
+
+        this.setState({
+            animal
+        });
+    };
+
+
     handleUpdatePhone = (phone) => {
         let { animal } = this.props;
         animal.phone = phone;
@@ -80,7 +90,7 @@ export default class HelpEditDetail extends React.Component {
     }
 
 
-
+    // 刪除
     handleDeletePress = () => {
         const { handleDeleteReport } = this.props;
         animal = () => handleDelete(id);
@@ -92,8 +102,7 @@ export default class HelpEditDetail extends React.Component {
         });
     };
 
-
-
+    //更新
     handleUpdatePress = () => {
         const { handleUpdateReport } = this.props;
 
@@ -103,6 +112,7 @@ export default class HelpEditDetail extends React.Component {
         this.setState({
             title: null,
             description: null,
+            locationdescript: null,
             phone: null,
             url: null,
             species: null,
@@ -115,8 +125,7 @@ export default class HelpEditDetail extends React.Component {
 
     render() {
         const { animal } = this.props;
-        const { image } = this.props;
-        const { handleUpdateTitle, handleUpdateDescription, handleUpdatePhone, handleUpdatePress, handleChangeSpecies, handleChangeCity, handleDeletePress, handleChangeRegion } = this;
+        const { handleUpdateTitle, handleUpdateDescription, handleUpdatePhone, handleUpdatePress, handleChangeSpecies, handleChangeCity, handleDeletePress, handleChangeRegion, handleUpdateLocationdescription } = this;
         return (
             <View style={styles.formContent} >
                 <ScrollView>
@@ -145,11 +154,15 @@ export default class HelpEditDetail extends React.Component {
                         </View>
 
                         <View>
-                            <TextInput value={animal.description} onChangeText={handleUpdateDescription} required defaultValue={animal.phone} style={styles.input}></TextInput>
+                            <TextInput value={animal.description} onChangeText={handleUpdateDescription} required defaultValue={animal.description} style={styles.input}></TextInput>
                         </View>
 
                         <View>
-                            <TextInput value={animal.phone} onChangeText={handleUpdatePhone} required defaultValue={animal.description} style={styles.input}></TextInput>
+                            <TextInput value={animal.locationdescript} onChangeText={handleUpdateLocationdescription} required defaultValue={animal.locationdescript} style={styles.input}></TextInput>
+                        </View>
+
+                        <View>
+                            <TextInput value={animal.phone} onChangeText={handleUpdatePhone} required defaultValue={animal.phone} style={styles.input}></TextInput>
                         </View>
 
                         <View style={styles.picker}>

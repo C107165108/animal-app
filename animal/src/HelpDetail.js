@@ -7,8 +7,19 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { WebView } from 'react-native-webview';
 
 
+
 export default function HelpDetail(props) {
-    const { animal, handleRedirectHelpDetailStrettView } = props;
+
+    function MarkerAnimal() {
+        const { animal } = props;
+        return
+    }
+    function MarkerNew() {
+        const { latitude, longitude } = props;
+        return
+    }
+
+    const { animal, latitude, longitude } = props;
     return (
         <View style={styles.content} >
             <ScrollView>
@@ -26,7 +37,16 @@ export default function HelpDetail(props) {
                                 <Text style={styles.phoneText}>{animal.phone}</Text>
                             </View>
 
-                            <Text style={styles.descriptionText}>{animal.description}</Text>
+                            <View style={styles.phoneContent}>
+                                <Image style={styles.phoneIcon} source={require('./images/animal.png')}></Image>
+                                <Text style={styles.phoneText}>{animal.description}</Text>
+                            </View>
+
+                            <View style={styles.phoneContent}>
+                                <Image style={styles.phoneIcon} source={require('./images/markers.png')}></Image>
+                                <Text style={styles.phoneText}>{animal.locationdescript}</Text>
+                            </View>
+
                         </View>
 
 
@@ -41,15 +61,44 @@ export default function HelpDetail(props) {
                             }}
                             provider="google"
                         >
-                            <Marker
+
+                            {/* {animal.latitude === null
+                                ? <Marker
+                                    coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
+                                    image={require('./images/marker.png')}
+                                />
+                                : <Marker
+                                    coordinate={{ latitude: latitude, longitude: longitude }}
+                                    image={require('./images/marker.png')}
+                                />} */}
+
+                            {animal.latitude === null
+                                ?
+                                <Marker
+                                    coordinate={{ latitude: latitude, longitude: longitude }}
+                                    image={require('./images/marker.png')}
+                                />
+                                :
+                                <Marker
+                                    coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
+                                    image={require('./images/marker.png')}
+                                />}
+                            {/* <Marker
                                 coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
                                 image={require('./images/marker.png')}
-                            />
+                            /> */}
+
                         </MapView>
 
                         <View style={styles.seeAllbtnContent}>
                             <TouchableOpacity style={styles.seeAllbtn} >
-                                <Text style={styles.seeAllbtnText} onPress={() => Actions.HelpDetailStrettView({ animal: animal })} > 查看街景 →</Text>
+                                <Text style={styles.seeAllbtnText}
+                                    onPress={() =>
+                                        Actions.HelpDetailStrettView({
+                                            animal: animal,
+                                            latitude: latitude,
+                                            longitude: longitude,
+                                        })} > 查看街景 →</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -62,7 +111,6 @@ export default function HelpDetail(props) {
 const styles = StyleSheet.create({
     content: {
         marginHorizontal: 16,
-        marginVertical: 16,
     },
     container: {
         flex: 1,
@@ -83,7 +131,7 @@ const styles = StyleSheet.create({
 
     informationContent: {
         marginHorizontal: 4,
-        marginVertical: 4,
+        marginBottom: 4,
         height: Dimensions.get('window').height / 1.75,
         justifyContent: 'space-between',
         alignContent: 'space-between',
@@ -91,7 +139,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
-        fontWeight: '600',
+        fontWeight: '700',
         color: 'black',
         marginTop: 4,
     },

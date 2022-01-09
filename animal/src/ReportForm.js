@@ -12,6 +12,7 @@ export default class ReportForm extends React.Component {
         this.state = {
             title: null,
             description: null,
+            locationdescript: null,
             phone: null,
             species: '請選擇物種',
             city: '請選擇城市',
@@ -79,6 +80,12 @@ export default class ReportForm extends React.Component {
         });
     };
 
+    handleChangeLocationdescript = (text) => {
+        this.setState({
+            locationdescript: text,
+        });
+    };
+
     handleChangePhone = (text) => {
         this.setState({
             phone: text,
@@ -115,6 +122,7 @@ export default class ReportForm extends React.Component {
         this.setState({
             title: null,
             description: null,
+            locationdescript: null,
             phone: null,
             species: '貓',
             city: '高雄市',
@@ -128,8 +136,8 @@ export default class ReportForm extends React.Component {
 
 
     render() {
-        const { title, description, phone, species, city, url, region } = this.state;
-        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleAddPress, handleChangeRegion } = this;
+        const { title, description, phone, species, city, url, region, locationdescript } = this.state;
+        const { handleChangeTitle, handleChangeDescription, handleChangePhone, handleChangeSpecies, handleChangeCity, handleAddPress, handleChangeRegion, handleChangeLocationdescript } = this;
         const { position } = this.state;
         return (
             <View style={styles.formContent} >
@@ -160,6 +168,10 @@ export default class ReportForm extends React.Component {
 
                         <View>
                             <TextInput value={description} placeholder='請輸入動物目前狀況' onChangeText={handleChangeDescription} style={styles.input}></TextInput>
+                        </View>
+
+                        <View style={styles.inputitem}>
+                            <TextInput value={locationdescript} placeholder='請輸入位置描述' onChangeText={handleChangeLocationdescript} style={styles.input}></TextInput>
                         </View>
 
                         <View>
@@ -267,8 +279,8 @@ const styles = StyleSheet.create({
         padding: 16,
 
     },
-    inputContent:{
-        marginTop:8,
+    inputContent: {
+        marginTop: 8,
     },
     picker: {
         paddingVertical: 8,
