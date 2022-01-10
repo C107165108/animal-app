@@ -148,10 +148,10 @@ export default class Home extends Component {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 22.729890557063307,
-                        longitude: 120.3555999613627,
-                        latitudeDelta: 0.1,
-                        longitudeDelta: 0.05
+                        latitude: 22.77328568023539,
+                        longitude: 120.40173905355759,
+                        latitudeDelta: 0.008,
+                        longitudeDelta: 0.008,
                     }}
                     provider="google"
                 >
@@ -160,7 +160,7 @@ export default class Home extends Component {
                         <Marker
                             key={index}
                             coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
-                            image={require('./images/marker.png') }
+                            image={require('./images/marker.png')}
 
                         >
                             <Callout tooltip>
