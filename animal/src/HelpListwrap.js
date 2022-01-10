@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image } from 'react-native';
+import React from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import HelpItem from './HelpItem';
-import { Actions } from 'react-native-router-flux';
 
 export default function HelpListwrap(props) {
 
     const { animals } = props;
-    const { handleRedirectHelpDetail, handleRedirectHelpEditDetail, handleAddReport } = props;
+    const { handleRedirectHelpDetail, handleRedirectHelpEditDetail } = props;
 
     return (
         <View style={styles.listcontent}>
@@ -20,15 +19,11 @@ export default function HelpListwrap(props) {
                                 onPress={handleRedirectHelpDetail}
                                 onLongPress={handleRedirectHelpEditDetail} />
                         )
-
                     }
                 </View>
 
             </ScrollView>
-            {/* <TouchableOpacity style={styles.addBtn} onPress={() => Actions.ReportForm({ handleAddReport: handleAddReport })}>
-                <Text style={styles.addBtnIcon}>+</Text>
-                
-            </TouchableOpacity> */}
+
         </View>
     );
 }
@@ -38,7 +33,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginVertical: 16,
         position: 'relative',
-
     },
 
     device: {
@@ -49,9 +43,7 @@ const styles = StyleSheet.create({
     addBtn: {
         backgroundColor: '#FA8B70',
         elevation: 4,
-
         borderRadius: 50,
-
         position: 'absolute',
         right: 16,
         top: 600,

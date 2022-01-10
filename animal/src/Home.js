@@ -71,14 +71,6 @@ export default class Home extends Component {
         });
     }
 
-    // handleDelete = (id) => {
-    //     let { animal } = this.state;
-    //     animal.id !== id;
-    //     this.setState({
-    //         animal
-    //     });
-    // }
-
     // 刪除資料
     handleDeleteReport = (id) => {
 
@@ -100,18 +92,7 @@ export default class Home extends Component {
 
     }
 
-    // 轉換到新增頁面
-    // componentDidMount() {
-    //     this.props.navigation.setParams({
-    //         rightTitle: 'vu',
-
-    //         onRight: () => {
-    //             Actions.ReportForm({ handleAddReport: this.handleAddReport });
-    //         },
-    //     });
-    // }
-
-    // 轉換到新增頁面
+    // 轉換到新增頁面(ReportForm)
     handleRedirectReportForm = () => {
         Actions.ReportForm({
             handleAddReport: this.handleAddReport
@@ -162,32 +143,29 @@ export default class Home extends Component {
 
         return (
             <View style={styles.container}>
-                
+
 
                 <MapView
                     style={styles.map}
                     initialRegion={{
                         latitude: 22.729890557063307,
                         longitude: 120.3555999613627,
-                        latitudeDelta: 0.1, //半徑
+                        latitudeDelta: 0.1,
                         longitudeDelta: 0.05
                     }}
                     provider="google"
                 >
-                    
+
                     {animals.map((animal, index) => (
                         <Marker
                             key={index}
                             coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
-                            image={require('./images/marker.png')}
+                            image={require('./images/marker.png') }
 
                         >
                             <Callout tooltip>
                                 <View style={styles.callOut}>
                                     <Text style={styles.callOutText}>  {animal.title}</Text>
-                                    {/* <Text >
-                                        <Image style={styles.callOutImg} source={{ uri: animal.url }} />
-                                    </Text> */}
                                     <View style={{ flex: 1 }}>
                                         <WebView style={styles.callOutImg} source={{ uri: animal.url }} />
                                     </View>
@@ -201,13 +179,11 @@ export default class Home extends Component {
                 <View style={styles.helpListContent} >
 
                     <TouchableOpacity style={styles.addBtn} onPress={handleRedirectReportForm}>
-                        {/* <Text style={styles.addBtnIcon} >+</Text> */}
                         <Image style={styles.addBtnIcon} source={require('./images/add.png')}></Image>
                     </TouchableOpacity>
 
 
                     <TouchableOpacity style={styles.addBtn} onPress={() => handleOpenURL(telURL)}>
-                        {/* <Text style={styles.addBtnIcon} >☼</Text> */}
                         <Image style={styles.addBtnIcon} source={require('./images/phoneicon.png')}></Image>
                     </TouchableOpacity>
 
@@ -277,7 +253,6 @@ const styles = StyleSheet.create({
         top: Dimensions.get("window").height - 440,
         position: 'relative',
         left: 0,
-
     },
 
     addBtn: {
@@ -310,7 +285,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         elevation: 4,
-
     },
     seeAllbtnText: {
         color: "#FA8B70",

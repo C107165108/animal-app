@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import StreetView from 'react-native-streetview';
 
 
 export default function HelpDetailStrettView(props) {
+
     const { animal, latitude, longitude } = props;
+    
     return (
         <View  >
-
 
             <View>
                 {animal.latitude === 0

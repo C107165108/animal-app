@@ -2,13 +2,11 @@ import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Actions } from 'react-native-router-flux';
 import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera } from 'react-native-image-picker';
 
 
 
 export default class HelpEditDetail extends React.Component {
-
-
 
     componentDidMount() {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
@@ -60,7 +58,6 @@ export default class HelpEditDetail extends React.Component {
         });
     };
 
-
     handleUpdatePhone = (phone) => {
         let { animal } = this.props;
         animal.phone = phone;
@@ -68,7 +65,6 @@ export default class HelpEditDetail extends React.Component {
             animal
         });
     };
-
 
     handleChangeSpecies = (species) => {
         let { animal } = this.props;
@@ -93,7 +89,6 @@ export default class HelpEditDetail extends React.Component {
             animal
         });
     }
-
 
     // 刪除
     handleDeletePress = () => {
@@ -125,8 +120,6 @@ export default class HelpEditDetail extends React.Component {
         });
     };
 
-
-
     render() {
         const { animal } = this.props;
         const { handleDeleteReport } = this.props;
@@ -141,6 +134,7 @@ export default class HelpEditDetail extends React.Component {
             handleChangeCity,
             handleChangeRegion,
             handleUpdateLocationdescription } = this;
+
         return (
             <View style={styles.formContent} >
                 <ScrollView>
@@ -271,7 +265,6 @@ const styles = StyleSheet.create({
         top: 175,
     },
     cameraBtn: {
-
         backgroundColor: '#ffffff',
         borderRadius: 30,
         paddingVertical: 8,

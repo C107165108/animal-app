@@ -1,7 +1,7 @@
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import { Actions } from 'react-native-router-flux';
-import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView, Platform, Alert } from 'react-native';
+import { PermissionsAndroid, StyleSheet, View, TextInput, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 navigator.geolocation = require('@react-native-community/geolocation');
 
@@ -65,9 +65,6 @@ export default class ReportForm extends React.Component {
         }
     };
 
-
-
-
     handleChangeTitle = (text) => {
         this.setState({
             title: text,
@@ -109,9 +106,6 @@ export default class ReportForm extends React.Component {
             region: value,
         });
     };
-
-
-
 
     handleAddPress = () => {
         const { handleAddReport } = this.props;
@@ -317,8 +311,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'black',
     }
-
-
 });
 
 

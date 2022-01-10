@@ -1,10 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-
-
+import { Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 export default function HelpItem(props) {
-
 
     const { animal, onPress, onLongPress } = props;
 
@@ -13,10 +10,12 @@ export default function HelpItem(props) {
             onPress={() => onPress(animal.id)}
             onLongPress={() => onLongPress(animal.id)}
             style={styles.deviceItem}>
+
             <Image source={{ uri: animal.url }} style={styles.Img} />
             <Text style={styles.title}>{animal.title}</Text>
             <Text style={styles.cityText}>{animal.city} {animal.region}</Text>
             <Text style={styles.timeText}>{animal.time}</Text>
+            
         </TouchableOpacity>
     );
 
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
     },
     cityText: {
         fontSize: 12,
-        fontWeight:'600',
+        fontWeight: '600',
         color: '#FA8B70',
         marginVertical: 4,
         marginHorizontal: 16,

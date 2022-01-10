@@ -1,7 +1,5 @@
 import React from 'react';
-import { Router, Stack, Scene, View, Image } from 'react-native-router-flux';
-import HelpMap from './HelpMap';
-import HelpStreet from './HelpStreet';
+import { Router, Stack, Scene } from 'react-native-router-flux';
 import Home from './Home';
 import HelpList from './HelpList';
 import ReportForm from './ReportForm';
@@ -10,21 +8,26 @@ import HelpEditDetail from './HelpEditDetail';
 import HelpListwrap from './HelpListwrap';
 import HelpDetailStrettView from './HelpDetailStrettView';
 
-// const icon = () => (
-//     <Image source={require('./images/cat1.jpeg')} style={{withe:20,height:20,}}/>
-// )
-
-
 
 export default function Routes() {
 
   return (
-    <Router showLabel={false} navigationBarStyle={{ backgroundColor: '#fff', opacity: 50, height: 70, elevation: 0, }}headerLayoutPreset={'center'} >
+    <Router
+      showLabel={false}
+      navigationBarStyle={{
+        backgroundColor: '#fff',
+        opacity: 50,
+        height: 70,
+        elevation: 0,
+      }}
+      headerLayoutPreset={'center'} >
 
       <Stack key="root" title='列表'
 
       >
-        <Scene key="Home" component={Home}
+        <Scene
+          key="Home"
+          component={Home}
           title="HELP&HELP"
           titleStyle={{
             color: '#fff',
@@ -32,7 +35,7 @@ export default function Routes() {
             fontWeight: '700',
             marginTop: 16,
             marginBottom: 8,
-            letterSpacing:5,
+            letterSpacing: 5,
 
           }}
           navigationBarStyle={{

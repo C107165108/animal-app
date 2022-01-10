@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import StreetView from 'react-native-streetview';
 import { Actions } from 'react-native-router-flux';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import { WebView } from 'react-native-webview';
+import MapView, { Marker } from 'react-native-maps';
+
 
 
 
@@ -47,7 +46,7 @@ export default function HelpDetail(props) {
                             initialRegion={{
                                 latitude: 22.729890557063307,
                                 longitude: 120.3555999613627,
-                                latitudeDelta: 0.1, //半徑
+                                latitudeDelta: 0.1,
                                 longitudeDelta: 0.05
                             }}
                             provider="google"
@@ -55,20 +54,17 @@ export default function HelpDetail(props) {
 
                             {animal.latitude === 0
                                 ?
-                                // console.log(latitude,longitude)
-
                                 <Marker
                                     coordinate={{ latitude: latitude, longitude: longitude }}
                                     image={require('./images/marker.png')}
                                 />
                                 :
-                                // console.log(animal.latitude,animal.longitude)
                                 <Marker
                                     coordinate={{ latitude: animal.latitude, longitude: animal.longitude }}
                                     image={require('./images/marker.png')}
                                 />
-                                }
-                         
+                            }
+
 
                         </MapView>
 
@@ -117,7 +113,6 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height / 1.75,
         justifyContent: 'space-between',
         alignContent: 'space-between',
-
     },
     title: {
         fontSize: 30,
@@ -162,8 +157,8 @@ const styles = StyleSheet.create({
         color: "#fff",
         paddingVertical: 18,
         fontWeight: '600',
-        letterSpacing:2,
-        fontSize:16,
+        letterSpacing: 2,
+        fontSize: 16,
     },
     cityText: {
         fontSize: 12,
@@ -186,7 +181,6 @@ const styles = StyleSheet.create({
         alignContent: 'space-between',
         justifyContent: 'space-between',
         marginTop: 12,
-
     },
 
 
