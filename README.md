@@ -1,4 +1,8 @@
-# 流浪動物回報app animal-app
+# HELP&HELP - android
 ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/main/animal/src/images/marker.png "Logo")
+流浪動物回報 app - android
 
-流浪動物回報app
+# 關於
+HELP&HELP是一個 流浪動物回報app ，您可以在此應用程式上回報在街上發現的流浪動物，讓人們更即時的觀看並前往救援。
+
+# 如何使用
