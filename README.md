@@ -1,6 +1,7 @@
-#![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/main/animal/src/images/marker.png "Logo") HELP&HELP - android
+# HELP&HELP - android
 
 ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/help%26help.pptx%20(1).png)
+
 
 # 關於
 
@@ -20,6 +21,11 @@ HELP&HELP是一個流浪動物回報app
 - 查看流浪動物街景
 
 # 畫面
+
+| **表頭1** | **表頭2** | **表頭3** |
+|-------|:-----:|------:|
+| ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/153040_google-pixel4-clearlywhite-portrait.png)   |  中1  |   右1 |
+
 
 # 權限
 
