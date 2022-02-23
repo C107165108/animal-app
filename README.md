@@ -1,5 +1,8 @@
 # HELP&HELP - android
 ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/main/animal/src/images/marker.png "Logo")
+
+![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/help%26help.pptx%20(1).png)
+
 流浪動物回報 app - android
 
 # 關於
