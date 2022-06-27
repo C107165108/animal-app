@@ -22,6 +22,4 @@ HELP&HELP是一個流浪動物回報app
 
 # 畫面
 
-| **list** | **read** | **u&d** |
-|-------|:-----:|------:|
-| ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/mockup-list.png)   |   ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/mockup-read.png) |   ![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/mockup-u%26d.png) |
+![圖片參考名稱](https://raw.githubusercontent.com/C107165108/animal-app/pic/help%24help.png) 
